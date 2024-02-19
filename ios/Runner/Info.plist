@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.1">
+<dict>
+	<key>UIBackgroundModes</key>
+	<array>
+	<string>remote-notification</string>
+	</array>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>UMP Mobile Attendance</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>UMP Mobile Attendance</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSCameraUsageDescription</key>
+	<!-- <string>This app requires access to the camera.</string> -->
+	<!-- <string>Aplikasi ini membutuhkan akses ke kamera. untuk mengambil foto yang digunakan pada fitur presensi dll</string> -->
+	<string>This application requires access to the camera. to take photos used in the presence feature etc</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<!-- <string>Aplikasi ini membutuhkan akses ke lokasi saat berada di latar belakang. untuk mendeteksi titik lokasi yang digunakan pada fitur presensi dll</string> -->
+	<string>This app needs access to the location while it is in the background. to detect location points used in presence features etc</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<!-- <string>Aplikasi ini membutuhkan akses ke lokasi saat terbuka. untuk mendeteksi titik lokasi yang digunakan pada fitur presensi dll</string> -->
+	<string>This app requires access to the location when it opens. to detect location points used in presence features etc</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<!-- <string>Aplikasi ini membutuhkan akses ke gallery foto. untuk mengambil foto yang digunakan pada fitur presensi dll</string> -->
+	<string>This application requires access to the photo gallery. to take photos used in the presence feature etc</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>The application does not use this feature</string>
+	<key>NSAppleMusicUsageDescription</key>
+    <string>Play audio files</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+</dict>
+</plist>
