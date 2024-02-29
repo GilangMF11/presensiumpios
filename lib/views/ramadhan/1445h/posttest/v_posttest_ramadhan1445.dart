@@ -1,27 +1,28 @@
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/pretestselanjutnya.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/posttest/v_posttest_selanjutnya1445.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Pretest extends StatefulWidget {
-  const Pretest({Key? key}) : super(key: key);
+class PosttestRamadhan1445 extends StatefulWidget {
+  const PosttestRamadhan1445({Key? key}) : super(key: key);
 
   @override
-  State<Pretest> createState() => _PretestState();
+  State<PosttestRamadhan1445> createState() => _PosttestRamadhan1445State();
 }
 
-class _PretestState extends State<Pretest> {
+class _PosttestRamadhan1445State extends State<PosttestRamadhan1445> {
   int? jawaban;
   bool? loading = true;
-  bool? loadingkirimpretest = false;
-  String? statuspretest;
+  bool? loadingkirimpostest = false;
+  String? statuspostest;
 
   getSoal() async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
-    await providerrekap.getSoalPretest();
+    final providerrekap =
+        Provider.of<ProviderRamadhan1445>(context, listen: false);
+    await providerrekap.getSoalPos();
     setState(() {
-      loading = providerrekap.loadingSoalPretest;
-      statuspretest = providerrekap.statuspretest;
+      loading = providerrekap.loadingSoalPostest;
+      statuspostest = providerrekap.statuspostest;
     });
   }
 
@@ -29,40 +30,40 @@ class _PretestState extends State<Pretest> {
     if (jawaban == null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.red.shade600,
-        content: Text(
+        content: const Text(
           "Anda belum memilih jawaban",
           style: TextStyle(color: Colors.white),
         ),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ));
       setState(() {
-        loadingkirimpretest = false;
+        loadingkirimpostest = false;
       });
     } else if (jawaban != null) {
       final providerrekap =
-          Provider.of<ProviderAlQuran>(context, listen: false);
-      await providerrekap.kirimSoalPretestJawab(soalid, jawabanid);
+          Provider.of<ProviderRamadhan1445>(context, listen: false);
+      await providerrekap.kirimSoalPostestJawab(soalid, jawabanid);
       setState(() {
-        loadingkirimpretest = providerrekap.kirimSoalPretest;
-        statuspretest = providerrekap.statuspretest;
+        loadingkirimpostest = providerrekap.kirimSoalPostest;
+        statuspostest = providerrekap.statuspostest;
       });
       Navigator.of(context)
           .push(MaterialPageRoute(
-              builder: (BuildContext context) => PretestSelanjutnya(
+              builder: (BuildContext context) => PosttestSelanjutnya1445(
                     index: 0,
                   )))
           .then((value) => {getSoal()});
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.red.shade600,
-        content: Text(
+        content: const Text(
           "Error",
           style: TextStyle(color: Colors.white),
         ),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ));
       setState(() {
-        loadingkirimpretest = false;
+        loadingkirimpostest = false;
       });
     }
   }
@@ -78,18 +79,19 @@ class _PretestState extends State<Pretest> {
 
   List<int>? soaljawbanid = [];
   List<String>? soaljawbantext = [];
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderAlQuran>(builder: (context, v, child) {
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, child) {
       // List<int> _numbers = List<int>.generate(10, (index) => index);
       soaljawbanid = [];
       soaljawbantext = [];
-      if (statuspretest == "buka") {
-        for (var i = 0; i < v.datapretest!.jawaban!.length; i++) {
-          if (v.datapretest!.response![0].soalId ==
-              v.datapretest!.jawaban![i].soalId) {
-            int aa = int.parse(v.datapretest!.jawaban![i].pilId!);
-            String bb = v.datapretest!.jawaban![i].pilJawaban!;
+      if (statuspostest == "buka") {
+        for (var i = 0; i < v.datapostest!.jawaban!.length; i++) {
+          if (v.datapostest!.response![0].soalId ==
+              v.datapostest!.jawaban![i].soalId) {
+            int aa = int.parse(v.datapostest!.jawaban![i].pilId!);
+            String bb = v.datapostest!.jawaban![i].pilJawaban!;
             soaljawbanid?.add(aa);
             soaljawbantext?.add(bb);
             print(aa);
@@ -98,60 +100,60 @@ class _PretestState extends State<Pretest> {
       }
       return Scaffold(
           appBar: AppBar(
-            title: Text('Pretest'),
+            title: const Text('Posttest'),
             backgroundColor: const Color(0xFF1d8b61),
           ),
           body: loading == true
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(
                     color: Color(0xFF1d8b61),
                   ),
                 )
               : SingleChildScrollView(
                   child: Padding(
-                  padding:
-                      EdgeInsets.only(top: 30, left: 30, right: 30, bottom: 10),
-                  child: statuspretest == "buka"
+                  padding: const EdgeInsets.only(
+                      top: 30, left: 30, right: 30, bottom: 10),
+                  child: statuspostest == "buka"
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Center(
+                            const Center(
                                 child: Padding(
-                              padding: const EdgeInsets.only(
+                              padding: EdgeInsets.only(
                                   left: 3, right: 3, bottom: 10),
                               child: Text(
                                 'Pertanyaan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             )),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             RichText(
                               text: TextSpan(
                                 text:
-                                    '${int.parse(v.datapretest?.response?.first.no ?? "")}.',
-                                style: TextStyle(
+                                    '${int.parse(v.datapostest?.response?.first.no ?? "")}.',
+                                style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black),
                                 children: <TextSpan>[
                                   TextSpan(
                                       text:
-                                          ' ${v.datapretest?.response?[0].soal}?',
-                                      style: TextStyle(
+                                          ' ${v.datapostest?.response?[0].soal}?',
+                                      style: const TextStyle(
                                           wordSpacing: 1,
                                           fontWeight: FontWeight.normal)),
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 50),
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -171,31 +173,33 @@ class _PretestState extends State<Pretest> {
                                             print("hasilnya ${value}");
                                           });
                                         }),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 40,
                                   ),
-                                  loadingkirimpretest == false
+                                  loadingkirimpostest == false
                                       ? Center(
                                           child: InkWell(
                                             onTap: () {
                                               setState(() {
-                                                loadingkirimpretest = true;
+                                                loadingkirimpostest = true;
                                                 kirimSoal(
-                                                    v.datapretest!.response![0]
+                                                    v.datapostest!.response![0]
                                                         .soalId,
                                                     jawaban);
                                               });
                                             },
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 15, horizontal: 30),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 15,
+                                                      horizontal: 30),
                                               decoration: BoxDecoration(
                                                   color:
                                                       const Color(0xFF1d8b61),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
-                                              child: Text(
+                                              child: const Text(
                                                 'Pertanyaan Selanjutnya',
                                                 style: TextStyle(
                                                     color: Colors.white),
@@ -207,18 +211,20 @@ class _PretestState extends State<Pretest> {
                                           child: InkWell(
                                             onTap: () {
                                               setState(() {
-                                                loadingkirimpretest = false;
+                                                loadingkirimpostest = false;
                                               });
                                             },
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 15, horizontal: 30),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 15,
+                                                      horizontal: 30),
                                               decoration: BoxDecoration(
                                                   color: Colors.grey,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
-                                              child: Text(
+                                              child: const Text(
                                                 'Loading',
                                                 style: TextStyle(
                                                     color: Colors.white),
@@ -226,7 +232,7 @@ class _PretestState extends State<Pretest> {
                                             ),
                                           ),
                                         ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
                                 ],
@@ -234,42 +240,42 @@ class _PretestState extends State<Pretest> {
                             ),
                           ],
                         )
-                      : statuspretest == "selesai"
+                      : statuspostest == "selesai"
                           ? Center(
                               child: Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "::Informasi::",
                                     style: TextStyle(fontSize: 17),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
                                   Text(v.dataErrorPretest?.metaData?.pesan ??
                                       ""),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 40,
                                   ),
-                                  Text("Skornya :"),
-                                  SizedBox(
+                                  const Text("Skornya :"),
+                                  const SizedBox(
                                     height: 20,
                                   ),
                                   Text("${v.skor}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 40,
                                           fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             )
-                          : statuspretest == "tutup"
+                          : statuspostest == "tutup"
                               ? Center(
                                   child: Column(
                                     children: [
-                                      Text(
+                                      const Text(
                                         "::Informasi::",
                                         style: TextStyle(fontSize: 17),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 20,
                                       ),
                                       Text(
@@ -280,7 +286,7 @@ class _PretestState extends State<Pretest> {
                                 )
                               : Center(
                                   child: Column(
-                                  children: [
+                                  children: const [
                                     Text(
                                       "::Informasi::",
                                       style: TextStyle(fontSize: 17),
@@ -315,7 +321,7 @@ class HomeContent extends StatelessWidget {
       activeColor: const Color(0xFF0a4f8f),
       title: Text(
         '$jawaban',
-        style: TextStyle(fontSize: 14),
+        style: const TextStyle(fontSize: 14),
       ),
     );
   }

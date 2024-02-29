@@ -1,36 +1,30 @@
-import 'dart:ffi';
-
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
 import 'package:attedancekaryawanump/views/ramadhan/1444h/doaharian.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/evaluasi.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/evaluasiqusioner.dart';
 import 'package:attedancekaryawanump/views/ramadhan/1444h/imsyakiyah.dart';
 import 'package:attedancekaryawanump/views/ramadhan/1444h/menualquran.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/menupresensi.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/posttest.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/presensiramadhan.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/pretest.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/sertifikat.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/posttest/v_posttest_ramadhan1445.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/presensi/v_menu_prensensi_ramadhan1445.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/pretest/v_pretest_ramadhan1445.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/quisioner/v_evaluasi_quisoner1445.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/sertifikat/v_sertifikat_ramadhan1445.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:provider/provider.dart';
 
-class AmaliaPages extends StatefulWidget {
-  const AmaliaPages({Key? key}) : super(key: key);
+class Ramadhan1455 extends StatefulWidget {
+  const Ramadhan1455({Key? key}) : super(key: key);
 
   @override
-  State<AmaliaPages> createState() => _AmaliaPagesState();
+  State<Ramadhan1455> createState() => _Ramadhan1455State();
 }
 
-class _AmaliaPagesState extends State<AmaliaPages> {
+class _Ramadhan1455State extends State<Ramadhan1455> {
   bool? loading = true;
   String? status = "normal";
 
   getDataGelombang() async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
+    final providerrekap =
+        Provider.of<ProviderRamadhan1445>(context, listen: false);
     await providerrekap.getMenuBaik();
     setState(() {
       status = providerrekap.statusgel;
@@ -49,24 +43,24 @@ class _AmaliaPagesState extends State<AmaliaPages> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderAlQuran>(builder: (context, v, child) {
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, child) {
       return Scaffold(
           // backgroundColor: Color(0xFFF7F4F0),
-          backgroundColor: Color(0xFFFFFFFF),
+          backgroundColor: const Color(0xFFFFFFFF),
           appBar: AppBar(
             backgroundColor: const Color(0xFF1d8b61),
             title: status == "normal"
-                ? Text('Ramadhan')
+                ? const Text('Ramadhan 1445')
                 : status == "ITIKAF"
-                    ? Text('Ramadhan 1444')
+                    ? const Text('Ramadhan 1445')
                     : status == "BAIK"
-                        ? Text('Ramadhan 1444')
+                        ? const Text('Ramadhan 1445')
                         : status == null
-                            ? Text('Ramadhan')
-                            : Text(""),
+                            ? const Text('Ramadhan')
+                            : const Text(""),
           ),
           body: status == "normal"
-              ? Container(
+              ? SizedBox(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: SingleChildScrollView(
@@ -75,15 +69,15 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                         Container(
                             height: MediaQuery.of(context).size.height * 0.08,
                             width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 5),
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 5),
                             // color: Colors.red,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
-                                  color: Color(0xFF1d8b61),
+                                  color: const Color(0xFF1d8b61),
                                 )),
                             child: Row(
                               children: [
@@ -92,12 +86,12 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                   child: Container(
                                     height: double.infinity,
                                     width: double.infinity,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Color(0xFF1d8b61),
                                         borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(5),
                                             topLeft: Radius.circular(5))),
-                                    child: Icon(
+                                    child: const Icon(
                                       FlutterIslamicIcons.drum2,
                                       color: Colors.white,
                                       size: 35,
@@ -109,13 +103,14 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                   child: Container(
                                     height: double.infinity,
                                     width: double.infinity,
-                                    padding: EdgeInsets.only(left: 5, right: 5),
+                                    padding: const EdgeInsets.only(
+                                        left: 5, right: 5),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         Text(
                                           "Menu Al Qur'an",
                                           maxLines: 2,
@@ -124,7 +119,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 15,
-                                            color: const Color(0xFF1d8b61),
+                                            color: Color(0xFF1d8b61),
                                           ),
                                         ),
                                       ],
@@ -133,12 +128,12 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                 ),
                               ],
                             )),
-                        Container(
+                        SizedBox(
                           height: MediaQuery.of(context).size.height * 0.90,
                           width: MediaQuery.of(context).size.width,
                           child: SingleChildScrollView(
                               child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Column(
                               children: [
                                 CardRamadhan(
@@ -151,7 +146,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                MenuAlQuran()));
+                                                const MenuAlQuran()));
                                   },
                                 ),
                                 CardRamadhan(
@@ -176,7 +171,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                   ),
                 )
               : status == "BAIK"
-                  ? Container(
+                  ? SizedBox(
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
                       child: SingleChildScrollView(
@@ -186,15 +181,15 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.08,
                                 width: MediaQuery.of(context).size.width,
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 5, horizontal: 5),
-                                margin: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.symmetric(
                                     vertical: 5, horizontal: 5),
                                 // color: Colors.red,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     border: Border.all(
-                                      color: Color(0xFF1d8b61),
+                                      color: const Color(0xFF1d8b61),
                                     )),
                                 child: Row(
                                   children: [
@@ -203,12 +198,12 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                       child: Container(
                                         height: double.infinity,
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: Color(0xFF1d8b61),
                                             borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(5),
                                                 topLeft: Radius.circular(5))),
-                                        child: Icon(
+                                        child: const Icon(
                                           FlutterIslamicIcons.drum2,
                                           color: Colors.white,
                                           size: 35,
@@ -220,15 +215,15 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                       child: Container(
                                         height: double.infinity,
                                         width: double.infinity,
-                                        padding:
-                                            EdgeInsets.only(left: 5, right: 5),
+                                        padding: const EdgeInsets.only(
+                                            left: 5, right: 5),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Text(
+                                            const Text(
                                               'Anda Terdaftar pada',
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
@@ -236,10 +231,10 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 15,
-                                                color: const Color(0xFF1d8b61),
+                                                color: Color(0xFF1d8b61),
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 1,
                                             ),
                                             Text(
@@ -258,12 +253,13 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                     ),
                                   ],
                                 )),
-                            Container(
+                            SizedBox(
                               height: MediaQuery.of(context).size.height * 0.90,
                               width: MediaQuery.of(context).size.width,
                               child: SingleChildScrollView(
                                   child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: Column(
                                   children: [
                                     CardRamadhan(
@@ -278,7 +274,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                             MaterialPageRoute(
                                                 builder: (BuildContext
                                                         context) =>
-                                                    MenuPresensiRamadhan()));
+                                                    const MenuPresensiRamadhan1445()));
                                       },
                                     ),
                                     CardRamadhan(
@@ -291,9 +287,9 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                       ontap: () {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        Pretest()))
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    const PretestRamadhan1445()))
                                             .then((value) =>
                                                 {getDataGelombang()});
                                         print("asd");
@@ -309,9 +305,9 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                       ontap: () {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        Posttest()));
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    const PosttestRamadhan1445()));
                                       },
                                     ),
                                     CardRamadhan(
@@ -324,9 +320,9 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                       ontap: () {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        EvaluasiQusioner()));
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    const EvaluasiQuisoner1445()));
                                         print("asd");
                                       },
                                     ),
@@ -340,9 +336,9 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                       ontap: () {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        Sertifikat()));
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    const SetifikatRamadhan1445()));
                                       },
                                     ),
                                     CardRamadhan(
@@ -356,7 +352,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                             MaterialPageRoute(
                                                 builder:
                                                     (BuildContext context) =>
-                                                        MenuAlQuran()));
+                                                        const MenuAlQuran()));
                                       },
                                     ),
                                     CardRamadhan(
@@ -387,7 +383,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                                         Imsyakiyah()));
                                       },
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 150,
                                     ),
                                   ],
@@ -399,7 +395,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                       ),
                     )
                   : status == "ITIKAF"
-                      ? Container(
+                      ? SizedBox(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
                           child: SingleChildScrollView(
@@ -409,15 +405,15 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                     height: MediaQuery.of(context).size.height *
                                         0.08,
                                     width: MediaQuery.of(context).size.width,
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: 5, horizontal: 5),
-                                    margin: EdgeInsets.symmetric(
+                                    margin: const EdgeInsets.symmetric(
                                         vertical: 5, horizontal: 5),
                                     // color: Colors.red,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
                                         border: Border.all(
-                                          color: Color(0xFF1d8b61),
+                                          color: const Color(0xFF1d8b61),
                                         )),
                                     child: Row(
                                       children: [
@@ -426,14 +422,14 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                           child: Container(
                                             height: double.infinity,
                                             width: double.infinity,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                                 color: Color(0xFF1d8b61),
                                                 borderRadius: BorderRadius.only(
                                                     bottomLeft:
                                                         Radius.circular(5),
                                                     topLeft:
                                                         Radius.circular(5))),
-                                            child: Icon(
+                                            child: const Icon(
                                               FlutterIslamicIcons.drum2,
                                               color: Colors.white,
                                               size: 35,
@@ -445,7 +441,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                           child: Container(
                                             height: double.infinity,
                                             width: double.infinity,
-                                            padding: EdgeInsets.only(
+                                            padding: const EdgeInsets.only(
                                                 left: 5, right: 5),
                                             child: Column(
                                               crossAxisAlignment:
@@ -453,7 +449,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text(
+                                                const Text(
                                                   'Anda Terdaftar pada',
                                                   maxLines: 2,
                                                   overflow:
@@ -462,11 +458,10 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 15,
-                                                    color:
-                                                        const Color(0xFF1d8b61),
+                                                    color: Color(0xFF1d8b61),
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 1,
                                                 ),
                                                 Text(
@@ -488,14 +483,14 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                         ),
                                       ],
                                     )),
-                                Container(
+                                SizedBox(
                                   height:
                                       MediaQuery.of(context).size.height * 0.90,
                                   width: MediaQuery.of(context).size.width,
                                   child: SingleChildScrollView(
                                       child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     child: Column(
                                       children: [
                                         CardRamadhan(
@@ -510,7 +505,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                                 MaterialPageRoute(
                                                     builder: (BuildContext
                                                             context) =>
-                                                        MenuPresensiRamadhan()));
+                                                        const MenuPresensiRamadhan1445()));
                                           },
                                         ),
                                         CardRamadhan(
@@ -525,8 +520,8 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                                 MaterialPageRoute(
                                                     builder: (BuildContext
                                                             context) =>
-                                                        EvaluasiQusioner()));
-                                            print("asd");
+                                                        const EvaluasiQuisoner1445()));
+                                            //print("asd");
                                           },
                                         ),
                                         CardRamadhan(
@@ -542,7 +537,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                                 MaterialPageRoute(
                                                     builder: (BuildContext
                                                             context) =>
-                                                        Sertifikat()));
+                                                        const SetifikatRamadhan1445()));
                                           },
                                         ),
                                         CardRamadhan(
@@ -556,7 +551,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                                 MaterialPageRoute(
                                                     builder: (BuildContext
                                                             context) =>
-                                                        MenuAlQuran()));
+                                                        const MenuAlQuran()));
                                           },
                                         ),
                                         CardRamadhan(
@@ -587,7 +582,7 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                                                         Imsyakiyah()));
                                           },
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 150,
                                         ),
                                       ],
@@ -598,157 +593,201 @@ class _AmaliaPagesState extends State<AmaliaPages> {
                             ),
                           ),
                         )
-                      : status == null
-                          ? Container(
+                      : status == "MANDIRI"
+                          ? SizedBox(
                               height: MediaQuery.of(context).size.height,
                               width: MediaQuery.of(context).size.width,
                               child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.08,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 5),
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 5),
-                                        // color: Colors.red,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            border: Border.all(
-                                              color: Color(0xFF1d8b61),
-                                            )),
-                                        child: Row(
+                                child: Column(),
+                              ),
+                            )
+                          : status == "EKSTERNAL"
+                              ? SizedBox(
+                                  height: MediaQuery.of(context).size.height,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: SingleChildScrollView(
+                                    child: Column(),
+                                  ),
+                                )
+                              : status == null
+                                  ? SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: SingleChildScrollView(
+                                        child: Column(
                                           children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child: Container(
-                                                height: double.infinity,
-                                                width: double.infinity,
+                                            Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.08,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 5),
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 5),
+                                                // color: Colors.red,
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xFF1d8b61),
                                                     borderRadius:
-                                                        BorderRadius.only(
-                                                            bottomLeft: Radius
-                                                                .circular(5),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    5))),
-                                                child: Icon(
-                                                  FlutterIslamicIcons.drum2,
-                                                  color: Colors.white,
-                                                  size: 35,
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 8,
-                                              child: Container(
-                                                height: double.infinity,
-                                                width: double.infinity,
-                                                padding: EdgeInsets.only(
-                                                    left: 5, right: 5),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    border: Border.all(
+                                                      color: const Color(
+                                                          0xFF1d8b61),
+                                                    )),
+                                                child: Row(
                                                   children: [
-                                                    Text(
-                                                      "Menu Al Qur'an",
-                                                      maxLines: 2,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 15,
-                                                        color: const Color(
-                                                            0xFF1d8b61),
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Container(
+                                                        height: double.infinity,
+                                                        width: double.infinity,
+                                                        decoration: const BoxDecoration(
+                                                            color: Color(
+                                                                0xFF1d8b61),
+                                                            borderRadius: BorderRadius.only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        5),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        5))),
+                                                        child: const Icon(
+                                                          FlutterIslamicIcons
+                                                              .drum2,
+                                                          color: Colors.white,
+                                                          size: 35,
+                                                        ),
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      height: 1,
-                                                    ),
-                                                    Text(
-                                                      "",
-                                                      maxLines: 2,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 12,
-                                                        // color: Colors
-                                                        //     .red.shade800
+                                                    Expanded(
+                                                      flex: 8,
+                                                      child: Container(
+                                                        height: double.infinity,
+                                                        width: double.infinity,
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 5,
+                                                                right: 5),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: const [
+                                                             Text(
+                                                              "Menu Al Qur'an",
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: 15,
+                                                                color: Color(
+                                                                    0xFF1d8b61),
+                                                              ),
+                                                            ),
+                                                             SizedBox(
+                                                              height: 1,
+                                                            ),
+                                                             Text(
+                                                              "",
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 12,
+                                                                // color: Colors
+                                                                //     .red.shade800
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
+                                                )),
+                                            SizedBox(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.90,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              child: SingleChildScrollView(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                child: Column(
+                                                  children: [
+                                                    CardRamadhan(
+                                                      nama: "Al Quran",
+                                                      deskripsi: "Kitab Suci",
+                                                      // warna: Color(0xFF0a4f8f),
+                                                      warna: Colors.white,
+                                                      icon: FlutterIslamicIcons
+                                                          .quran2,
+                                                      ontap: () {
+                                                        Navigator.of(context).push(
+                                                            MaterialPageRoute(
+                                                                builder: (BuildContext
+                                                                        context) =>
+                                                                    const MenuAlQuran()));
+                                                      },
+                                                    ),
+                                                    CardRamadhan(
+                                                      nama: "Doa Harian",
+                                                      deskripsi:
+                                                          "Kumpulan Doa Harian",
+                                                      // warna: Color(0xFF0a4f8f),
+                                                      warna: Colors.white,
+                                                      icon: FlutterIslamicIcons
+                                                          .prayer,
+                                                      ontap: () {
+                                                        Navigator.of(context).push(
+                                                            MaterialPageRoute(
+                                                                builder: (BuildContext
+                                                                        context) =>
+                                                                    DoaHarian()));
+                                                      },
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                            ),
-                                          ],
-                                        )),
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.90,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: SingleChildScrollView(
-                                          child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Column(
-                                          children: [
-                                            CardRamadhan(
-                                              nama: "Al Quran",
-                                              deskripsi: "Kitab Suci",
-                                              // warna: Color(0xFF0a4f8f),
-                                              warna: Colors.white,
-                                              icon: FlutterIslamicIcons.quran2,
-                                              ontap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            MenuAlQuran()));
-                                              },
-                                            ),
-                                            CardRamadhan(
-                                              nama: "Doa Harian",
-                                              deskripsi: "Kumpulan Doa Harian",
-                                              // warna: Color(0xFF0a4f8f),
-                                              warna: Colors.white,
-                                              icon: FlutterIslamicIcons.prayer,
-                                              ontap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            DoaHarian()));
-                                              },
+                                              )),
                                             ),
                                           ],
                                         ),
-                                      )),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          : Container());
+                                      ),
+                                    )
+                                  : Container());
     });
   }
 }
-
 
 class CardRamadhan extends StatefulWidget {
   String? nama;
@@ -785,7 +824,7 @@ class _CardRamadhanState extends State<CardRamadhan> {
             width: double.infinity,
             decoration: BoxDecoration(
                 boxShadow: <BoxShadow>[
-                  BoxShadow(
+                  const BoxShadow(
                       color: Colors.black12,
                       blurRadius: 7.0,
                       offset: Offset(0.0, 0.75))
@@ -811,7 +850,7 @@ class _CardRamadhanState extends State<CardRamadhan> {
                           flex: 3,
                           child: Container(
                             height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment(1, 1),
@@ -835,10 +874,10 @@ class _CardRamadhanState extends State<CardRamadhan> {
                                   color: Colors.white,
                                   size: 35,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 7,
                                 ),
-                                Text(
+                                const Text(
                                   'Ramadhan 1444',
                                   maxLines: 2,
                                   textAlign: TextAlign.center,
@@ -863,13 +902,13 @@ class _CardRamadhanState extends State<CardRamadhan> {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
-                                    color: const Color(0xFF1d8b61),
+                                    color: Color(0xFF1d8b61),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(

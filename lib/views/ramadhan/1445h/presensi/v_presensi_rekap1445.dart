@@ -1,19 +1,19 @@
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RekapPresensiRamadhan extends StatefulWidget {
-  RekapPresensiRamadhan({Key? key}) : super(key: key);
+class RekapPresensiRamadhan1445 extends StatefulWidget {
+  const RekapPresensiRamadhan1445({Key? key}) : super(key: key);
 
   @override
-  State<RekapPresensiRamadhan> createState() => _RekapPresensiRamadhanState();
+  State<RekapPresensiRamadhan1445> createState() => _RekapPresensiRamadhan1445State();
 }
 
-class _RekapPresensiRamadhanState extends State<RekapPresensiRamadhan> {
+class _RekapPresensiRamadhan1445State extends State<RekapPresensiRamadhan1445> {
   bool? loading = true;
 
   getPegajian() async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
+    final providerrekap = Provider.of<ProviderRamadhan1445>(context, listen: false);
     await providerrekap.getRekapPresensiRamadhan();
     setState(() {
       loading = providerrekap.rekaploadingramadhan;
@@ -27,14 +27,13 @@ class _RekapPresensiRamadhanState extends State<RekapPresensiRamadhan> {
     });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderAlQuran>(builder: (context, v, Child) {
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, Child) {
       return SafeArea(
           child: Scaffold(
         appBar: AppBar(
-          title: Text('Rekap Pengajian'),
+          title: const Text('Rekap Pengajian'),
           backgroundColor: const Color(0xFF1d8b61),
         ),
         body: loading == false
@@ -68,19 +67,21 @@ class _RekapPresensiRamadhanState extends State<RekapPresensiRamadhan> {
             //     color: Colors.transparent,
             //     child: Center(child: Text('Mohon Menunggu...')),
             //   ))
-            : Center(
+            : const Center(
                 child: CircularProgressIndicator.adaptive(
-                backgroundColor: const Color(0xFF0a4f8f),
+                backgroundColor: Color(0xFF0a4f8f),
               )),
       ));
     });
   }
 }
 
+
+// ignore: must_be_immutable
 class CardMenu extends StatefulWidget {
   String? title;
   String? hikmah;
-  CardMenu({this.title, this.hikmah});
+  CardMenu({Key? key, this.title, this.hikmah}) : super(key: key);
 
   @override
   State<CardMenu> createState() => _CardMenuState();
@@ -134,8 +135,8 @@ class _CardMenuState extends State<CardMenu> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(top: 20),
-                          child: Text(
+                          margin: const EdgeInsets.only(top: 20),
+                          child: const Text(
                             ':: List Presensi ::',
                             style: TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w700),
@@ -143,8 +144,8 @@ class _CardMenuState extends State<CardMenu> {
                         ),
                         Container(
                           margin:
-                              EdgeInsets.symmetric(vertical: 6, horizontal: 40),
-                          child: Divider(),
+                              const EdgeInsets.symmetric(vertical: 6, horizontal: 40),
+                          child: const Divider(),
                         ),
                         cardlist(widget.title ?? "", widget.hikmah ?? "")
                       ],
@@ -153,14 +154,14 @@ class _CardMenuState extends State<CardMenu> {
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           height: 50,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
           child: Card(
               child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -172,7 +173,7 @@ class _CardMenuState extends State<CardMenu> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Expanded(child: Icon(Icons.keyboard_arrow_down_sharp))
+                  const Expanded(child: Icon(Icons.keyboard_arrow_down_sharp))
                 ],
               ),
             ),
@@ -182,7 +183,7 @@ class _CardMenuState extends State<CardMenu> {
 
   cardlist(String title, String hikmah) {
     return Container(
-      margin: EdgeInsets.only(bottom: 7),
+      margin: const EdgeInsets.only(bottom: 7),
       child: InkWell(
         onTap: () {
           Navigator.pop(context);
@@ -194,7 +195,7 @@ class _CardMenuState extends State<CardMenu> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.mosque,
                   color: Colors.green,
                 ),
@@ -205,7 +206,7 @@ class _CardMenuState extends State<CardMenu> {
               ),
               Container(
                 margin:
-                    EdgeInsets.only(top: 10, bottom: 50, left: 10, right: 10),
+                    const EdgeInsets.only(top: 10, bottom: 50, left: 10, right: 10),
                 child: Text(
                   hikmah,
                   maxLines: 3,

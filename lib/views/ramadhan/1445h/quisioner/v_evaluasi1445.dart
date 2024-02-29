@@ -1,17 +1,17 @@
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class Evaluasi extends StatefulWidget {
+class Evaluasi1445 extends StatefulWidget {
   int? index;
-  Evaluasi({Key? key, this.index}) : super(key: key);
+  Evaluasi1445({Key? key, this.index}) : super(key: key);
 
   @override
-  State<Evaluasi> createState() => _EvaluasiState();
+  State<Evaluasi1445> createState() => _Evaluasi1445State();
 }
 
-class _EvaluasiState extends State<Evaluasi> {
+class _Evaluasi1445State extends State<Evaluasi1445> {
   String? statusEval;
   bool? loadingeval = true;
   bool? loadingkirim = false;
@@ -19,7 +19,7 @@ class _EvaluasiState extends State<Evaluasi> {
   var kritikController = TextEditingController();
   var saranController = TextEditingController();
   getCekKetersedian() async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
+    final providerrekap = Provider.of<ProviderRamadhan1445>(context, listen: false);
     await providerrekap.cekEvaluasi();
     setState(() {
       statusEval = providerrekap.statusevaluasi;
@@ -30,7 +30,7 @@ class _EvaluasiState extends State<Evaluasi> {
   }
 
   kirimEval(String? kritikA, String? saranA) async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
+    final providerrekap = Provider.of<ProviderRamadhan1445>(context, listen: false);
     print(kritikA);
     print(saranA);
     await providerrekap.kirimEvaluasi(kritikA, saranA);
@@ -38,7 +38,7 @@ class _EvaluasiState extends State<Evaluasi> {
     print(hasil);
     if (hasil == "berhasil") {
       setState(() {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Color(0xFF1d8b61),
           content: Text(
             "Jawaban Berhasil dikirim",
@@ -56,11 +56,11 @@ class _EvaluasiState extends State<Evaluasi> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.red.shade600,
-        content: Text(
+        content: const Text(
           "Gagal",
           style: TextStyle(color: Colors.white),
         ),
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
       ));
       setState(() {
         loadingkirim = providerrekap.laodingkirimeval;
@@ -69,14 +69,14 @@ class _EvaluasiState extends State<Evaluasi> {
   }
 
   hapusEval() async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
+    final providerrekap = Provider.of<ProviderRamadhan1445>(context, listen: false);
 
     await providerrekap.hapusEvaluasi();
     String? hasil = providerrekap.statuskirimEval;
     print(hasil);
     if (hasil == "berhasil") {
       setState(() {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Color(0xFF1d8b61),
           content: Text(
             "Hapus Jawaban Berhasil",
@@ -93,11 +93,11 @@ class _EvaluasiState extends State<Evaluasi> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.red.shade600,
-        content: Text(
+        content: const Text(
           "Gagal",
           style: TextStyle(color: Colors.white),
         ),
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
       ));
       setState(() {
         loadinghapus = providerrekap.laodingkirimeval;
@@ -118,11 +118,11 @@ class _EvaluasiState extends State<Evaluasi> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Evaluasi'),
+          title: const Text('Evaluasi'),
           backgroundColor: const Color(0xFF1d8b61),
         ),
         body: loadingeval == true
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(
                   color: Color(0xFF1d8b61),
                 ),
@@ -136,15 +136,15 @@ class _EvaluasiState extends State<Evaluasi> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            const Text(
                               'Masukan kritik dan saran',
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Align(
@@ -167,7 +167,7 @@ class _EvaluasiState extends State<Evaluasi> {
                             Padding(
                               padding: EdgeInsets.only(top: 3.w),
                               child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 2),
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
@@ -182,7 +182,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                         color: Colors.grey.withOpacity(0.1),
                                         spreadRadius: 0.5,
                                         blurRadius: 2,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       )
                                     ],
@@ -192,12 +192,12 @@ class _EvaluasiState extends State<Evaluasi> {
                                     controller: kritikController,
                                     maxLines: 5,
                                     maxLength: 500,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                     ),
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Align(
@@ -220,7 +220,7 @@ class _EvaluasiState extends State<Evaluasi> {
                             Padding(
                               padding: EdgeInsets.only(top: 3.w),
                               child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 2),
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
@@ -235,7 +235,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                         color: Colors.grey.withOpacity(0.1),
                                         spreadRadius: 0.5,
                                         blurRadius: 2,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       )
                                     ],
@@ -245,12 +245,12 @@ class _EvaluasiState extends State<Evaluasi> {
                                     controller: saranController,
                                     maxLines: 5,
                                     maxLength: 500,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                     ),
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 50,
                             ),
                             Center(
@@ -265,14 +265,14 @@ class _EvaluasiState extends State<Evaluasi> {
                                         },
                                         child: Container(
                                           width: 200,
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                             vertical: 15,
                                           ),
                                           decoration: BoxDecoration(
                                               color: const Color(0xFF1d8b61),
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          child: Center(
+                                          child: const Center(
                                             child: Text(
                                               'Kirim Jawaban',
                                               style: TextStyle(
@@ -289,14 +289,14 @@ class _EvaluasiState extends State<Evaluasi> {
                                         },
                                         child: Container(
                                           width: 200,
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                             vertical: 15,
                                           ),
                                           decoration: BoxDecoration(
                                               color: Colors.grey.shade500,
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          child: Center(
+                                          child: const Center(
                                             child: Text(
                                               'loading',
                                               style: TextStyle(
@@ -315,15 +315,15 @@ class _EvaluasiState extends State<Evaluasi> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            const Text(
                               'Masukan kritik dan saran',
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Align(
@@ -346,7 +346,7 @@ class _EvaluasiState extends State<Evaluasi> {
                             Padding(
                               padding: EdgeInsets.only(top: 3.w),
                               child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 2),
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
@@ -361,7 +361,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                         color: Colors.grey.withOpacity(0.1),
                                         spreadRadius: 0.5,
                                         blurRadius: 2,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       )
                                     ],
@@ -371,12 +371,12 @@ class _EvaluasiState extends State<Evaluasi> {
                                     controller: kritikController,
                                     maxLines: 5,
                                     maxLength: 500,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                     ),
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Align(
@@ -399,7 +399,7 @@ class _EvaluasiState extends State<Evaluasi> {
                             Padding(
                               padding: EdgeInsets.only(top: 3.w),
                               child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 2),
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
@@ -414,7 +414,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                         color: Colors.grey.withOpacity(0.1),
                                         spreadRadius: 0.5,
                                         blurRadius: 2,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       )
                                     ],
@@ -424,12 +424,12 @@ class _EvaluasiState extends State<Evaluasi> {
                                     controller: saranController,
                                     maxLines: 5,
                                     maxLength: 500,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: InputBorder.none,
                                     ),
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             InkWell(
@@ -440,7 +440,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                       return StatefulBuilder(
                                           builder: (context, setState) {
                                         return AlertDialog(
-                                          title: Text(
+                                          title: const Text(
                                             "Apakah kamu akan menghapus jawaban ini?",
                                             style: TextStyle(fontSize: 16),
                                           ),
@@ -465,7 +465,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                                                     true;
                                                               });
                                                             },
-                                                            child: Text(
+                                                            child: const Text(
                                                               "Ya",
                                                               style: TextStyle(
                                                                   color: Colors
@@ -484,21 +484,21 @@ class _EvaluasiState extends State<Evaluasi> {
                                                             onPressed: () {
                                                               setState(() {});
                                                             },
-                                                            child: Text(
+                                                            child: const Text(
                                                               "Loading",
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .white),
                                                             ),
                                                           ))),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               Expanded(
                                                 flex: 5,
                                                 child: Container(
                                                   decoration: BoxDecoration(
-                                                      color: Color(0xFF1d8b61),
+                                                      color: const Color(0xFF1d8b61),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5)),
@@ -506,7 +506,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                                       onPressed: () {
                                                         Navigator.pop(context);
                                                       },
-                                                      child: Text(
+                                                      child: const Text(
                                                         "Tidak",
                                                         style: TextStyle(
                                                             color:
@@ -523,20 +523,20 @@ class _EvaluasiState extends State<Evaluasi> {
                               child: Row(
                                 children: [
                                   Container(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           vertical: 5, horizontal: 5),
                                       decoration: BoxDecoration(
                                         color: Colors.red.shade600,
                                         shape: BoxShape.circle,
                                       ),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.delete,
                                         color: Colors.white,
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Hapus Jawaban',
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.black54),
@@ -544,7 +544,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 50,
                             ),
                             Center(
@@ -559,14 +559,14 @@ class _EvaluasiState extends State<Evaluasi> {
                                         },
                                         child: Container(
                                           width: 200,
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                             vertical: 15,
                                           ),
                                           decoration: BoxDecoration(
                                               color: const Color(0xFF1d8b61),
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          child: Center(
+                                          child: const Center(
                                             child: Text(
                                               'Kirim Jawaban',
                                               style: TextStyle(
@@ -583,14 +583,14 @@ class _EvaluasiState extends State<Evaluasi> {
                                         },
                                         child: Container(
                                           width: 200,
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                             vertical: 15,
                                           ),
                                           decoration: BoxDecoration(
                                               color: Colors.grey.shade500,
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          child: Center(
+                                          child: const Center(
                                             child: Text(
                                               'loading',
                                               style: TextStyle(
@@ -599,7 +599,7 @@ class _EvaluasiState extends State<Evaluasi> {
                                           ),
                                         ),
                                       )),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                           ],

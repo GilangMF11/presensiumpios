@@ -1,10 +1,6 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:provider/provider.dart';
 
 class Persurah extends StatefulWidget {

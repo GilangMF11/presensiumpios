@@ -2,11 +2,7 @@ import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
 import 'package:attedancekaryawanump/views/ramadhan/1444h/detailimsyakiyah.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
-import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 

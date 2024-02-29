@@ -13,6 +13,7 @@ import 'package:attedancekaryawanump/views/presensi/presensi.dart';
 import 'package:attedancekaryawanump/views/provider/providerlogin.dart';
 import 'package:attedancekaryawanump/views/ramadhan/1444h/amalia_pages.dart';
 import 'package:attedancekaryawanump/views/ramadhan/1444h/presensiramadhan.dart';
+import 'package:attedancekaryawanump/views/ramadhan/v_ramadhan.dart';
 import 'package:attedancekaryawanump/views/rekap/rekap.dart';
 import 'package:attedancekaryawanump/views/utils/version.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -786,7 +787,7 @@ class _DashbardKaryawanState extends State<DashbardKaryawan> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AmaliaPages()),
+                    MaterialPageRoute(builder: (context) => const RamadhanPage()),
                   );
                 }),
           ),

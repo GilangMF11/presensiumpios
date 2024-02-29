@@ -1,25 +1,27 @@
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/presensiramadhan.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/rekappresensiramadhan.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/presensi/v_presensi_ramadhan1445.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/presensi/v_presensi_rekap1445.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class MenuPresensiRamadhan extends StatefulWidget {
-  const MenuPresensiRamadhan({Key? key}) : super(key: key);
+class MenuPresensiRamadhan1445 extends StatefulWidget {
+  const MenuPresensiRamadhan1445({Key? key}) : super(key: key);
 
   @override
-  State<MenuPresensiRamadhan> createState() => _MenuPresensiRamadhanState();
+  State<MenuPresensiRamadhan1445> createState() =>
+      _MenuPresensiRamadhan1445State();
 }
 
-class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
+class _MenuPresensiRamadhan1445State extends State<MenuPresensiRamadhan1445> {
   bool? loading = true;
   String? statuspresensi;
   String? statuspresensiket;
   List? lisket;
   getPegajian() async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
+    final providerrekap =
+        Provider.of<ProviderRamadhan1445>(context, listen: false);
     await providerrekap.getPengajian();
     setState(() {
       statuspresensi = providerrekap.statuPresensiDibuka;
@@ -51,35 +53,35 @@ class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
   @override
   void initState() {
     getPegajian();
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderAlQuran>(builder: (context, v, child) {
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, child) {
       return Scaffold(
           // backgroundColor: Color(0xFFF7F4F0),
-          backgroundColor: Color(0xFFFFFFFF),
+          backgroundColor: const Color(0xFFFFFFFF),
           appBar: AppBar(
             backgroundColor: const Color(0xFF1d8b61),
-            title: Text("Presensi"),
+            title: const Text("Presensi"),
             actions: [
               InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => RekapPresensiRamadhan()),
+                        builder: (context) =>
+                            const RekapPresensiRamadhan1445()),
                   );
                 },
                 child: Row(
                   children: [
-                    Icon(Icons.receipt_rounded),
+                    const Icon(Icons.receipt_rounded),
                     SizedBox(
                       width: 1.w,
                     ),
-                    Text('Rekap'),
+                    const Text('Rekap'),
                     SizedBox(
                       width: 1.w,
                     ),
@@ -89,19 +91,20 @@ class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
             ],
           ),
           body: loading == false
-              ? Container(
+              ? SizedBox(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
                           child: statuspresensi == "buka"
                               ? SingleChildScrollView(
                                   child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   child: Column(
                                     children: [
                                       for (var i = 0;
@@ -124,7 +127,7 @@ class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
                                                 MaterialPageRoute(
                                                     builder: (BuildContext
                                                             context) =>
-                                                        PresensiRamadhan(
+                                                        PresensiRamadhan1445(
                                                           materi_id: v
                                                               .datapresensiRamdhadan
                                                               ?.response?[i]
@@ -184,7 +187,7 @@ class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
                                                         )));
                                           },
                                         ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 150,
                                       ),
                                     ],
@@ -200,27 +203,28 @@ class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "::INFO::",
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 18,
                                         ),
-                                        Text('"Presensi Belum Di Buka"',
+                                        const Text('"Presensi Belum Di Buka"',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w700)),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 30,
                                         ),
                                         for (var i = 0; i < lisket!.length; i++)
                                           Container(
-                                            margin: EdgeInsets.only(bottom: 10),
-                                            padding: EdgeInsets.symmetric(
+                                            margin: const EdgeInsets.only(
+                                                bottom: 10),
+                                            padding: const EdgeInsets.symmetric(
                                                 vertical: 15, horizontal: 5),
                                             decoration: BoxDecoration(
                                                 color: const Color(0xFF1d8b61),
@@ -228,7 +232,7 @@ class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
                                                     BorderRadius.circular(5)),
                                             child: Text(lisket?[i],
                                                 textAlign: TextAlign.center,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 14,
                                                     color: Colors.white)),
                                           ),
@@ -241,7 +245,7 @@ class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
                     ),
                   ),
                 )
-              : Center(
+              : const Center(
                   child: CircularProgressIndicator(
                     color: Color(0xFF1d8b61),
                   ),
@@ -250,6 +254,7 @@ class _MenuPresensiRamadhanState extends State<MenuPresensiRamadhan> {
   }
 }
 
+// ignore: must_be_immutable
 class CardRamadhan extends StatefulWidget {
   String? nama;
   String? deskripsi;
@@ -259,13 +264,15 @@ class CardRamadhan extends StatefulWidget {
   VoidCallback? ontap;
   String? sesi;
   CardRamadhan(
-      {this.nama,
+      {Key? key,
+      this.nama,
       this.deskripsi,
       this.gambar,
       this.warna,
       this.icon,
       this.ontap,
-      this.sesi});
+      this.sesi})
+      : super(key: key);
 
   @override
   State<CardRamadhan> createState() => _CardRamadhanState();
@@ -286,7 +293,7 @@ class _CardRamadhanState extends State<CardRamadhan> {
             height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(
-                boxShadow: <BoxShadow>[
+                boxShadow: const <BoxShadow>[
                   BoxShadow(
                       color: Colors.black12,
                       blurRadius: 7.0,
@@ -313,7 +320,7 @@ class _CardRamadhanState extends State<CardRamadhan> {
                           flex: 2,
                           child: Container(
                             height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment(1, 1),
@@ -344,7 +351,7 @@ class _CardRamadhanState extends State<CardRamadhan> {
                                   'SESI ${widget.sesi}',
                                   maxLines: 2,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 15,
                                       color: Colors.white),
@@ -365,13 +372,13 @@ class _CardRamadhanState extends State<CardRamadhan> {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
-                                    color: const Color(0xFF1d8b61),
+                                    color: Color(0xFF1d8b61),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(

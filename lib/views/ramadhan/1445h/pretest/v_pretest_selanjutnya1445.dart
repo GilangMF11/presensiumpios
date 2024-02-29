@@ -1,17 +1,17 @@
 import 'package:attedancekaryawanump/views/homedashboard.dart';
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PretestSelanjutnya extends StatefulWidget {
+class PretestSelanjutnya1445 extends StatefulWidget {
   int? index;
-  PretestSelanjutnya({required this.index});
+  PretestSelanjutnya1445({required this.index});
 
   @override
-  State<PretestSelanjutnya> createState() => _PretestSelanjutnyaState();
+  State<PretestSelanjutnya1445> createState() => _PretestSelanjutnya1445State();
 }
 
-class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
+class _PretestSelanjutnya1445State extends State<PretestSelanjutnya1445> {
   int? jawaban;
   bool? loading = true;
   String? statuspretest;
@@ -20,7 +20,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
   getSoal() async {
     int? hasil = widget.index! + 1;
     int? back = hasil;
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
+    final providerrekap = Provider.of<ProviderRamadhan1445>(context, listen: false);
     await providerrekap.getSoalPretest();
     setState(() {
       statuspretest = providerrekap.statuspretest;
@@ -82,14 +82,14 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
       });
     } else if (jawaban != null) {
       final providerrekap =
-          Provider.of<ProviderAlQuran>(context, listen: false);
+          Provider.of<ProviderRamadhan1445>(context, listen: false);
       await providerrekap.kirimSoalPretestJawab(soalid, jawabanid);
       setState(() {
         loadingkirimpretest = providerrekap.kirimSoalPretest;
         statuspretest = providerrekap.statuspretest;
       });
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => PretestSelanjutnya(
+          builder: (BuildContext context) => PretestSelanjutnya1445(
                 index: hasil,
               )));
     } else {
@@ -107,14 +107,13 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
     }
   }
 
-  // List<int>? soaljawbanid = [];
-  // List<String>? soaljawbantext = [];
+
   @override
   Widget build(BuildContext context) {
     int? hasil = widget.index! + 1;
     print("jumlah index ${hasil}");
 
-    return Consumer<ProviderAlQuran>(builder: (context, v, child) {
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, child) {
       // print("$hasil ${v.datapretest!.jawaban!.length}");
       soaljawbanid = [];
       soaljawbantext = [];
@@ -340,6 +339,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
     });
   }
 }
+
 
 class HomeContent extends StatelessWidget {
   final int? value;

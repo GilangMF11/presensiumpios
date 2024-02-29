@@ -1,12 +1,6 @@
-import 'package:attedancekaryawanump/views/model/modelevaluasiquisioner.dart';
 import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/amalia_pages.dart';
 import 'package:attedancekaryawanump/views/ramadhan/1444h/evaluasiqusionerselanjutnya.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/pretestselanjutnya.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class EvaluasiQusioner extends StatefulWidget {

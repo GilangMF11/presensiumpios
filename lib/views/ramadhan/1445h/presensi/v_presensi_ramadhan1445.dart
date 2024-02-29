@@ -1,7 +1,8 @@
-import 'package:attedancekaryawanump/views/model/modelpengajian.dart';
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,7 @@ import 'package:sizer/sizer.dart';
 import 'dart:math' show sin, cos, sqrt, atan2;
 import 'package:vector_math/vector_math.dart' as math;
 
-class PresensiRamadhan extends StatefulWidget {
+class PresensiRamadhan1445 extends StatefulWidget {
   String? materi_id;
   String? kegiatan;
   String? tanggale;
@@ -23,7 +24,7 @@ class PresensiRamadhan extends StatefulWidget {
   String? long;
   String? radius;
   String? hikmah;
-  PresensiRamadhan(
+  PresensiRamadhan1445(
       {this.materi_id,
       this.kegiatan,
       this.tanggale,
@@ -37,12 +38,11 @@ class PresensiRamadhan extends StatefulWidget {
       this.long,
       this.radius,
       this.hikmah});
-
   @override
-  State<PresensiRamadhan> createState() => _PresensiRamadhanState();
+  State<PresensiRamadhan1445> createState() => _PresensiRamadhan1445State();
 }
 
-class _PresensiRamadhanState extends State<PresensiRamadhan> {
+class _PresensiRamadhan1445State extends State<PresensiRamadhan1445> {
   TextEditingController hikmahController = TextEditingController();
   // bool? loading = true;
   bool? _isLoading = false;
@@ -75,6 +75,20 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
   //     print('PlatformException $e');
   //   }
   // }
+
+  // Dapatkan Lokasi Terkini
+  Future<void> getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      print("Latitude Perangkat: ${position.latitude}");
+      print("Longitude Perangkat: ${position.longitude}");
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
 
   Future<Position> _getGeoLocationPosition() async {
     bool serviceEnabled;
@@ -137,6 +151,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
     print(double.parse(widget.lat!));
     print(double.parse(widget.long!));
     print(widget.radius);
+
     // if (currentSelectedValuekampus == null) {
     //   Position position = await _getGeoLocationPosition();
     //   setState(() {
@@ -213,7 +228,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
       setState(() {
         _isLoading = false;
         _isLoadingLocation = false;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.red,
           content: Text("Anda Berada Diluar Radius Kantor!!"),
         ));
@@ -243,7 +258,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
   // }
 
   _kirim(String? hikmah) async {
-    if (hikmah == '') {
+    if (hikmah == '' || hikmah == "Belum Mengisi") {
       setState(() {
         _isLoading = false;
       });
@@ -270,7 +285,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
     } else if (statusrad == 'gagal') {
       setState(() {
         _isLoading = false;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.red,
           content: Text("Diluar Radius Presensi!!"),
         ));
@@ -278,18 +293,18 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
     } else if (statusrad == 'belum') {
       setState(() {
         _isLoading = false;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.red,
             content: Text("Diluar Radius Presensi!!")));
       });
     } else if (statusrad == 'masuk') {
       final _providerPresensi =
-          Provider.of<ProviderAlQuran>(context, listen: false);
+          Provider.of<ProviderRamadhan1445>(context, listen: false);
       await _providerPresensi.kirimPresensiPengajian(hikmahController.text);
       String? status = _providerPresensi.presensistatus;
       if (status == "berhasil") {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: const Color(0xFF1d8b61),
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            backgroundColor: Color(0xFF1d8b61),
             content: Text("Persensi Berhasil")));
         int count = 0;
         Navigator.of(context).popUntil((_) => count++ >= 2);
@@ -297,13 +312,13 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
           _isLoading = _providerPresensi.loadingkirimpresensi;
         });
       } else if (status == "gagal") {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.red, content: Text("Presensi Gagal")));
         setState(() {
           _isLoading = _providerPresensi.loadingkirimpresensi;
         });
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.red, content: Text("Presensi Gagal")));
         setState(() {
           _isLoading = _providerPresensi.loadingkirimpresensi;
@@ -331,20 +346,15 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
       // pLng = double.parse(widget.lat!);
       // TrustLocation.start(1);
       // getLocationAA();
-      hikmahController = TextEditingController()..text = "${widget.hikmah}";
+      // hikmahController = TextEditingController()..text = "${widget.hikmah}";
     });
-
+    //getCurrentLocation();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ModelPengajianGet? listData =
-    //     Provider.of<ProviderPengajian>(context, listen: true).dataPengajian;
-    // List<ResponsePengajian>? namMasjid =
-    //     Provider.of<ProviderPengajian>(context, listen: true).listNamaKegiatan;
-    // print("datanya adalah ${namMasjid?.length}");
-    return Consumer<ProviderAlQuran>(builder: (context, v, child) {
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, child) {
       return Scaffold(
           floatingActionButton: _isLoading == false
               ? SizedBox(
@@ -360,7 +370,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                     },
                     child: Text('Simpan', style: TextStyle(fontSize: 10.sp)),
                     // backgroundColor: Color(0xFF41436A)
-                    backgroundColor: Color.fromARGB(255, 223, 84, 56),
+                    backgroundColor: const Color.fromARGB(255, 223, 84, 56),
                   ),
                 )
               : SizedBox(
@@ -374,7 +384,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                           // _kirim(currentSelectedValue.toString());
                         });
                       },
-                      child: CircularProgressIndicator(
+                      child: const CircularProgressIndicator(
                         color: Colors.white,
                       ),
                       backgroundColor: Colors.grey),
@@ -403,7 +413,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
             //   ),
             // )
             // ],
-            title: Text(
+            title: Text(    
               'Presensi Pengajian',
               style: TextStyle(fontSize: 12.sp),
             ),
@@ -437,8 +447,8 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                   Padding(
                     padding: EdgeInsets.only(top: 3.w),
                     child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 30),
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           // color: const Color(0xff7c94b6),
@@ -452,8 +462,8 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                               color: Colors.grey.withOpacity(0.1),
                               spreadRadius: 0.5,
                               blurRadius: 2,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             )
                           ],
                           borderRadius: BorderRadius.circular(5),
@@ -485,8 +495,8 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                   Padding(
                     padding: EdgeInsets.only(top: 3.w),
                     child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 2),
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           // color: const Color(0xff7c94b6),
@@ -500,8 +510,8 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                               color: Colors.grey.withOpacity(0.1),
                               spreadRadius: 0.5,
                               blurRadius: 2,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             )
                           ],
                           borderRadius: BorderRadius.circular(5),
@@ -509,7 +519,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                         child: TextField(
                           controller: hikmahController,
                           maxLines: 5,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                           ),
                         )),
@@ -614,7 +624,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                   Padding(
                     padding: EdgeInsets.only(top: 6.w),
                     child: Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           // color: const Color(0xff7c94b6),
@@ -628,8 +638,8 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                               color: Colors.grey.withOpacity(0.1),
                               spreadRadius: 0.5,
                               blurRadius: 2,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             )
                           ],
                           borderRadius: BorderRadius.circular(5),
@@ -661,10 +671,10 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
 
                               Position position =
                                   await _getGeoLocationPosition();
-                              print("mnvbc");
+                              //print("mnvbc");
                             },
                             child: Container(
-                                padding: EdgeInsets.all(15),
+                                padding: const EdgeInsets.all(15),
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.symmetric(
                                     horizontal: 6.w, vertical: 6.w),
@@ -677,7 +687,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                                         color: Colors.grey.withOpacity(0.1),
                                         spreadRadius: 0.5,
                                         blurRadius: 2,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       )
                                     ]),
@@ -695,7 +705,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                               });
                             },
                             child: Container(
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               alignment: Alignment.center,
                               margin: EdgeInsets.symmetric(
                                   horizontal: 6.w, vertical: 6.w),
@@ -703,7 +713,7 @@ class _PresensiRamadhanState extends State<PresensiRamadhan> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.grey,
                                   boxShadow: []),
-                              child: CircularProgressIndicator(
+                              child: const CircularProgressIndicator(
                                 color: Colors.white,
                               ),
                             ),

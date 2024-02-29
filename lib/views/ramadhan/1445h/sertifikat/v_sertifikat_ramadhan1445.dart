@@ -1,22 +1,22 @@
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Sertifikat extends StatefulWidget {
-  const Sertifikat({Key? key}) : super(key: key);
+class SetifikatRamadhan1445 extends StatefulWidget {
+  const SetifikatRamadhan1445({Key? key}) : super(key: key);
 
   @override
-  State<Sertifikat> createState() => _SertifikatState();
+  State<SetifikatRamadhan1445> createState() => _SetifikatRamadhan1445State();
 }
 
-class _SertifikatState extends State<Sertifikat> {
+class _SetifikatRamadhan1445State extends State<SetifikatRamadhan1445> {
   bool? loading = true;
   String? status;
   String? statussertifikat;
   getPegajian() async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
+    final providerrekap = Provider.of<ProviderRamadhan1445>(context, listen: false);
     await providerrekap.getSertifikat();
     setState(() {
       status = providerrekap.link;
@@ -30,25 +30,24 @@ class _SertifikatState extends State<Sertifikat> {
     getPegajian();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderAlQuran>(builder: (context, v, child) {
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, child) {
       return Scaffold(
           // backgroundColor: Color(0xFFF7F4F0),
-          backgroundColor: Color(0xFFFFFFFF),
+          backgroundColor: const Color(0xFFFFFFFF),
           appBar: AppBar(
             backgroundColor: const Color(0xFF1d8b61),
-            title: Text("Sertifikat"),
+            title: const Text("Sertifikat"),
           ),
           body: loading == false
-              ? Container(
+              ? SizedBox(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: MediaQuery.of(context).size.height,
                           width: MediaQuery.of(context).size.width,
                           child: SingleChildScrollView(
@@ -59,19 +58,19 @@ class _SertifikatState extends State<Sertifikat> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "::INFO::",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 30,
                                   ),
                                   statussertifikat == "tutup"
                                       ? Text("$status",
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w700))
                                       : Column(
@@ -89,7 +88,7 @@ class _SertifikatState extends State<Sertifikat> {
                                                         .externalApplication);
                                               },
                                               child: Container(
-                                                  padding: EdgeInsets.all(15),
+                                                  padding: const EdgeInsets.all(15),
                                                   alignment: Alignment.center,
                                                   margin: EdgeInsets.symmetric(
                                                       horizontal: 6.w,
@@ -107,7 +106,7 @@ class _SertifikatState extends State<Sertifikat> {
                                                               .withOpacity(0.1),
                                                           spreadRadius: 0.5,
                                                           blurRadius: 2,
-                                                          offset: Offset(0,
+                                                          offset: const Offset(0,
                                                               3), // changes position of shadow
                                                         )
                                                       ]),
@@ -120,7 +119,7 @@ class _SertifikatState extends State<Sertifikat> {
                                             ),
                                           ],
                                         ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 30,
                                   ),
                                 ],
@@ -132,7 +131,7 @@ class _SertifikatState extends State<Sertifikat> {
                     ),
                   ),
                 )
-              : Center(
+              : const Center(
                   child: CircularProgressIndicator(
                     color: Color(0xFF1d8b61),
                   ),

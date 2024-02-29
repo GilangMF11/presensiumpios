@@ -11,6 +11,7 @@ import 'package:attedancekaryawanump/views/provider/providerrekap.dart';
 import 'package:attedancekaryawanump/views/provider/providerrekaplembur.dart';
 import 'package:attedancekaryawanump/views/provider/providerrekaplogbook.dart';
 import 'package:attedancekaryawanump/views/provider/providerrekappremit.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
 import 'package:attedancekaryawanump/views/utils/sertifikatssl.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ProviderPresensi()),
         ChangeNotifierProvider(create: (_) => ProviderPengajian()),
         ChangeNotifierProvider(create: (_) => ProviderAlQuran()),
+        ChangeNotifierProvider(create: (_) => ProviderRamadhan1445())
       ],
       child: Sizer(builder: (BuildContext context, Orientation orientation,
           DeviceType deviceType) {

@@ -1,39 +1,39 @@
 import 'package:attedancekaryawanump/views/homedashboard.dart';
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PretestSelanjutnya extends StatefulWidget {
+class PosttestSelanjutnya1445 extends StatefulWidget {
   int? index;
-  PretestSelanjutnya({required this.index});
+  PosttestSelanjutnya1445({required this.index});
 
   @override
-  State<PretestSelanjutnya> createState() => _PretestSelanjutnyaState();
+  State<PosttestSelanjutnya1445> createState() => _PosttestSelanjutnya1445State();
 }
 
-class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
+class _PosttestSelanjutnya1445State extends State<PosttestSelanjutnya1445> {
   int? jawaban;
   bool? loading = true;
-  String? statuspretest;
-  bool? loadingkirimpretest = false;
+  String? statuspostest;
+  bool? loadingkirimpostest = false;
 
   getSoal() async {
     int? hasil = widget.index! + 1;
     int? back = hasil;
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
-    await providerrekap.getSoalPretest();
+    final providerrekap = Provider.of<ProviderRamadhan1445>(context, listen: false);
+    await providerrekap.getSoalPos();
     setState(() {
-      statuspretest = providerrekap.statuspretest;
+      statuspostest = providerrekap.statuspostest;
     });
-    print(statuspretest);
-    if (statuspretest == "tutup") {
+    print(statuspostest);
+    if (statuspostest == "tutup") {
       setState(() {
-        loading = providerrekap.loadingSoalPretest;
+        loading = providerrekap.loadingSoalPostest;
       });
       Navigator.of(context).push(MaterialPageRoute(
           builder: (BuildContext context) => HomeDashboard()));
     }
-    if (statuspretest == "selesai") {
+    if (statuspostest == "selesai") {
       int count = 0;
       Navigator.of(context).popUntil((_) => count++ >= hasil);
 
@@ -44,11 +44,11 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
       // Navigator.of(context).push(
       //     MaterialPageRoute(builder: (BuildContext context) => SkoPreterPretest()));
       setState(() {
-        loading = providerrekap.loadingSoalPretest;
+        loading = providerrekap.loadingSoalPostest;
       });
-    } else if (statuspretest == "buka") {
+    } else if (statuspostest == "buka") {
       setState(() {
-        loading = providerrekap.loadingSoalPretest;
+        loading = providerrekap.loadingSoalPostest;
       });
     }
   }
@@ -78,18 +78,18 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
         duration: Duration(seconds: 3),
       ));
       setState(() {
-        loadingkirimpretest = false;
+        loadingkirimpostest = false;
       });
     } else if (jawaban != null) {
       final providerrekap =
-          Provider.of<ProviderAlQuran>(context, listen: false);
-      await providerrekap.kirimSoalPretestJawab(soalid, jawabanid);
+          Provider.of<ProviderRamadhan1445>(context, listen: false);
+      await providerrekap.kirimSoalPostestJawab(soalid, jawabanid);
       setState(() {
-        loadingkirimpretest = providerrekap.kirimSoalPretest;
-        statuspretest = providerrekap.statuspretest;
+        loadingkirimpostest = providerrekap.kirimSoalPostest;
+        statuspostest = providerrekap.statuspostest;
       });
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => PretestSelanjutnya(
+          builder: (BuildContext context) => PosttestSelanjutnya1445(
                 index: hasil,
               )));
     } else {
@@ -102,47 +102,44 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
         duration: Duration(seconds: 3),
       ));
       setState(() {
-        loadingkirimpretest = false;
+        loadingkirimpostest = false;
       });
     }
   }
-
-  // List<int>? soaljawbanid = [];
-  // List<String>? soaljawbantext = [];
   @override
   Widget build(BuildContext context) {
     int? hasil = widget.index! + 1;
     print("jumlah index ${hasil}");
 
-    return Consumer<ProviderAlQuran>(builder: (context, v, child) {
-      // print("$hasil ${v.datapretest!.jawaban!.length}");
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, child) {
+      // print("$hasil ${v.datapostest!.jawaban!.length}");
       soaljawbanid = [];
       soaljawbantext = [];
-      print("idsoal = $hasil jawaban ${v.datapretest!.response!.length}");
-      if (statuspretest == "buka") {
-        if (hasil == v.datapretest!.response!.length) {
-          statuspretest = "selesai";
+      print("idsoal = $hasil jawaban ${v.datapostest!.response!.length}");
+      if (statuspostest == "buka") {
+        if (hasil == v.datapostest!.response!.length) {
+          statuspostest = "selesai";
           print("buka");
-        } else if (hasil > v.datapretest!.response!.length) {
+        } else if (hasil > v.datapostest!.response!.length) {
           print("lebih");
-          statuspretest = "selesai";
-        } else if (hasil < v.datapretest!.response!.length) {
-          for (var i = 0; i < v.datapretest!.jawaban!.length; i++) {
-            if (v.datapretest!.response![hasil].soalId ==
-                v.datapretest!.jawaban![i].soalId) {
-              int aa = int.parse(v.datapretest!.jawaban![i].pilId!);
-              String bb = v.datapretest!.jawaban![i].pilJawaban!;
+          statuspostest = "selesai";
+        } else if (hasil < v.datapostest!.response!.length) {
+          for (var i = 0; i < v.datapostest!.jawaban!.length; i++) {
+            if (v.datapostest!.response![hasil].soalId ==
+                v.datapostest!.jawaban![i].soalId) {
+              int aa = int.parse(v.datapostest!.jawaban![i].pilId!);
+              String bb = v.datapostest!.jawaban![i].pilJawaban!;
               soaljawbanid?.add(aa);
               soaljawbantext?.add(bb);
             }
           }
         }
-      } else if (statuspretest == "selesai") {
+      } else if (statuspostest == "selesai") {
         print("aaaaaaayaa");
       }
       return Scaffold(
           appBar: AppBar(
-            title: Text('Pretest'),
+            title: Text('Postest'),
             backgroundColor: const Color(0xFF1d8b61),
           ),
           body: loading == true
@@ -155,7 +152,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
                   child: Padding(
                     padding: EdgeInsets.only(
                         top: 30, left: 30, right: 30, bottom: 10),
-                    child: statuspretest == "selesai"
+                    child: statuspostest == "selesai"
                         ? Center(
                             child: Column(
                               children: [
@@ -164,7 +161,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
                               ],
                             ),
                           )
-                        : statuspretest == "buka"
+                        : statuspostest == "buka"
                             ? Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,7 +182,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
                                   RichText(
                                     text: TextSpan(
                                       text:
-                                          '${int.parse(v.datapretest?.response?[hasil].no ?? "")}.',
+                                          '${int.parse(v.datapostest?.response?[hasil].no ?? "")}.',
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
@@ -193,7 +190,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
                                       children: <TextSpan>[
                                         TextSpan(
                                             text:
-                                                ' ${v.datapretest?.response?[hasil].soal ?? ""}?',
+                                                ' ${v.datapostest?.response?[hasil].soal ?? ""}?',
                                             style: TextStyle(
                                                 wordSpacing: 1,
                                                 fontWeight: FontWeight.normal)),
@@ -201,7 +198,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
                                     ),
                                   ),
                                   // Text(
-                                  //   '${v.datapretest?.response?[hasil].no}. ${v.datapretest?.response?[hasil].soal}?',
+                                  //   '${v.datapostest?.response?[hasil].no}. ${v.datapostest?.response?[hasil].soal}?',
                                   //   style: TextStyle(
                                   //       fontSize: 15, fontWeight: FontWeight.bold),
                                   // ),
@@ -237,16 +234,16 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
                                         SizedBox(
                                           height: 40,
                                         ),
-                                        loadingkirimpretest == false
+                                        loadingkirimpostest == false
                                             ? Center(
                                                 child: InkWell(
                                                   onTap: () {
                                                     setState(() {
-                                                      loadingkirimpretest =
+                                                      loadingkirimpostest =
                                                           true;
                                                       kirimSoal(
                                                           v
-                                                              .datapretest!
+                                                              .datapostest!
                                                               .response![hasil]
                                                               .soalId,
                                                           jawaban);
@@ -275,7 +272,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
                                                 child: InkWell(
                                                   onTap: () {
                                                     setState(() {
-                                                      loadingkirimpretest =
+                                                      loadingkirimpostest =
                                                           false;
                                                     });
                                                   },
@@ -305,7 +302,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
                                   ),
                                 ],
                               )
-                            : statuspretest == "tutup"
+                            : statuspostest == "tutup"
                                 ? Center(
                                     child: Column(
                                       children: [
@@ -340,6 +337,7 @@ class _PretestSelanjutnyaState extends State<PretestSelanjutnya> {
     });
   }
 }
+
 
 class HomeContent extends StatelessWidget {
   final int? value;

@@ -1,27 +1,27 @@
-import 'package:attedancekaryawanump/views/provider/ramadhan/1444h/provideralquran.dart';
-import 'package:attedancekaryawanump/views/ramadhan/1444h/pretestselanjutnya.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/providerRamadhan1445.dart';
+import 'package:attedancekaryawanump/views/ramadhan/1445h/quisioner/v_quisoner_selanjutnya1445.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Pretest extends StatefulWidget {
-  const Pretest({Key? key}) : super(key: key);
+class EvaluasiQuisoner1445 extends StatefulWidget {
+  const EvaluasiQuisoner1445({Key? key}) : super(key: key);
 
   @override
-  State<Pretest> createState() => _PretestState();
+  State<EvaluasiQuisoner1445> createState() => _EvaluasiQuisoner1445State();
 }
 
-class _PretestState extends State<Pretest> {
+class _EvaluasiQuisoner1445State extends State<EvaluasiQuisoner1445> {
   int? jawaban;
   bool? loading = true;
-  bool? loadingkirimpretest = false;
-  String? statuspretest;
+  bool? loadingkirimquisioner = false;
+  String? statusqusioner;
 
   getSoal() async {
-    final providerrekap = Provider.of<ProviderAlQuran>(context, listen: false);
-    await providerrekap.getSoalPretest();
+    final providerrekap = Provider.of<ProviderRamadhan1445>(context, listen: false);
+    await providerrekap.getEvaluasiQusioner();
     setState(() {
-      loading = providerrekap.loadingSoalPretest;
-      statuspretest = providerrekap.statuspretest;
+      loading = providerrekap.loadingquisioner;
+      statusqusioner = providerrekap.statusquisioner;
     });
   }
 
@@ -29,40 +29,40 @@ class _PretestState extends State<Pretest> {
     if (jawaban == null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.red.shade600,
-        content: Text(
+        content: const Text(
           "Anda belum memilih jawaban",
           style: TextStyle(color: Colors.white),
         ),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ));
       setState(() {
-        loadingkirimpretest = false;
+        loadingkirimquisioner = false;
       });
     } else if (jawaban != null) {
       final providerrekap =
-          Provider.of<ProviderAlQuran>(context, listen: false);
-      await providerrekap.kirimSoalPretestJawab(soalid, jawabanid);
+          Provider.of<ProviderRamadhan1445>(context, listen: false);
+      await providerrekap.kirimEvaluasiQusioner(soalid, jawabanid);
       setState(() {
-        loadingkirimpretest = providerrekap.kirimSoalPretest;
-        statuspretest = providerrekap.statuspretest;
+        loadingkirimquisioner = providerrekap.kirimquisioner;
+        statusqusioner = providerrekap.statusquisioner;
       });
       Navigator.of(context)
           .push(MaterialPageRoute(
-              builder: (BuildContext context) => PretestSelanjutnya(
+              builder: (BuildContext context) => EvaluasiQuisionerSelanjutnya1455(
                     index: 0,
                   )))
           .then((value) => {getSoal()});
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.red.shade600,
-        content: Text(
+        content: const Text(
           "Error",
           style: TextStyle(color: Colors.white),
         ),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ));
       setState(() {
-        loadingkirimpretest = false;
+        loadingkirimquisioner = false;
       });
     }
   }
@@ -78,31 +78,34 @@ class _PretestState extends State<Pretest> {
 
   List<int>? soaljawbanid = [];
   List<String>? soaljawbantext = [];
+
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderAlQuran>(builder: (context, v, child) {
+    return Consumer<ProviderRamadhan1445>(builder: (context, v, child) {
       // List<int> _numbers = List<int>.generate(10, (index) => index);
       soaljawbanid = [];
       soaljawbantext = [];
-      if (statuspretest == "buka") {
-        for (var i = 0; i < v.datapretest!.jawaban!.length; i++) {
-          if (v.datapretest!.response![0].soalId ==
-              v.datapretest!.jawaban![i].soalId) {
-            int aa = int.parse(v.datapretest!.jawaban![i].pilId!);
-            String bb = v.datapretest!.jawaban![i].pilJawaban!;
-            soaljawbanid?.add(aa);
-            soaljawbantext?.add(bb);
-            print(aa);
-          }
+      if (statusqusioner == "buka") {
+        for (var i = 0; i < 5; i++) {
+          // if (v.dataquisioner!.response![0].soalId ==
+          //     v.dataquisioner!.jawaban![i].pilId) {
+          int aa = int.parse(v.dataquisioner!.jawaban![i].pilId!);
+          String bb = v.dataquisioner!.jawaban![i].pilJawaban!;
+          soaljawbanid?.add(aa);
+          soaljawbantext?.add(bb);
+          print(aa);
+          // }
         }
       }
+
       return Scaffold(
           appBar: AppBar(
-            title: Text('Pretest'),
+            title: const Text('Evaluasi Quisioner'),
             backgroundColor: const Color(0xFF1d8b61),
           ),
           body: loading == true
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(
                     color: Color(0xFF1d8b61),
                   ),
@@ -110,48 +113,48 @@ class _PretestState extends State<Pretest> {
               : SingleChildScrollView(
                   child: Padding(
                   padding:
-                      EdgeInsets.only(top: 30, left: 30, right: 30, bottom: 10),
-                  child: statuspretest == "buka"
+                      const EdgeInsets.only(top: 30, left: 30, right: 30, bottom: 10),
+                  child: statusqusioner == "buka"
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Center(
+                            const Center(
                                 child: Padding(
-                              padding: const EdgeInsets.only(
+                              padding: EdgeInsets.only(
                                   left: 3, right: 3, bottom: 10),
                               child: Text(
                                 'Pertanyaan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             )),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             RichText(
                               text: TextSpan(
                                 text:
-                                    '${int.parse(v.datapretest?.response?.first.no ?? "")}.',
-                                style: TextStyle(
+                                    '${int.parse(v.dataquisioner?.response?.first.no ?? "")}.',
+                                style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black),
                                 children: <TextSpan>[
                                   TextSpan(
                                       text:
-                                          ' ${v.datapretest?.response?[0].soal}?',
-                                      style: TextStyle(
+                                          ' ${v.dataquisioner?.response?[0].soal}?',
+                                      style: const TextStyle(
                                           wordSpacing: 1,
                                           fontWeight: FontWeight.normal)),
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 50),
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -171,23 +174,23 @@ class _PretestState extends State<Pretest> {
                                             print("hasilnya ${value}");
                                           });
                                         }),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 40,
                                   ),
-                                  loadingkirimpretest == false
+                                  loadingkirimquisioner == false
                                       ? Center(
                                           child: InkWell(
                                             onTap: () {
                                               setState(() {
-                                                loadingkirimpretest = true;
+                                                loadingkirimquisioner = true;
                                                 kirimSoal(
-                                                    v.datapretest!.response![0]
-                                                        .soalId,
+                                                    v.dataquisioner!
+                                                        .response![0].soalId,
                                                     jawaban);
                                               });
                                             },
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(
+                                              padding: const EdgeInsets.symmetric(
                                                   vertical: 15, horizontal: 30),
                                               decoration: BoxDecoration(
                                                   color:
@@ -195,7 +198,7 @@ class _PretestState extends State<Pretest> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
-                                              child: Text(
+                                              child: const Text(
                                                 'Pertanyaan Selanjutnya',
                                                 style: TextStyle(
                                                     color: Colors.white),
@@ -207,18 +210,18 @@ class _PretestState extends State<Pretest> {
                                           child: InkWell(
                                             onTap: () {
                                               setState(() {
-                                                loadingkirimpretest = false;
+                                                loadingkirimquisioner = false;
                                               });
                                             },
                                             child: Container(
-                                              padding: EdgeInsets.symmetric(
+                                              padding: const EdgeInsets.symmetric(
                                                   vertical: 15, horizontal: 30),
                                               decoration: BoxDecoration(
                                                   color: Colors.grey,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
-                                              child: Text(
+                                              child: const Text(
                                                 'Loading',
                                                 style: TextStyle(
                                                     color: Colors.white),
@@ -226,7 +229,7 @@ class _PretestState extends State<Pretest> {
                                             ),
                                           ),
                                         ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
                                 ],
@@ -234,42 +237,42 @@ class _PretestState extends State<Pretest> {
                             ),
                           ],
                         )
-                      : statuspretest == "selesai"
+                      : statusqusioner == "selesai"
                           ? Center(
                               child: Column(
-                                children: [
-                                  Text(
-                                    "::Informasi::",
+                                children: const [
+                                   Text(
+                                    "::Sudah Selesai::",
                                     style: TextStyle(fontSize: 17),
                                   ),
-                                  SizedBox(
+                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text(v.dataErrorPretest?.metaData?.pesan ??
-                                      ""),
-                                  SizedBox(
-                                    height: 40,
-                                  ),
-                                  Text("Skornya :"),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text("${v.skor}",
-                                      style: TextStyle(
-                                          fontSize: 40,
-                                          fontWeight: FontWeight.bold)),
+                                  // Text(v.dataErrorPretest?.metaData?.pesan ??
+                                  //     ""),
+                                  // SizedBox(
+                                  //   height: 40,
+                                  // ),
+                                  // Text("Skornya :"),
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  // Text("${v.skor}",
+                                  //     style: TextStyle(
+                                  //         fontSize: 40,
+                                  //         fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             )
-                          : statuspretest == "tutup"
+                          : statusqusioner == "tutup"
                               ? Center(
                                   child: Column(
                                     children: [
-                                      Text(
+                                      const Text(
                                         "::Informasi::",
                                         style: TextStyle(fontSize: 17),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 20,
                                       ),
                                       Text(
@@ -281,20 +284,21 @@ class _PretestState extends State<Pretest> {
                               : Center(
                                   child: Column(
                                   children: [
-                                    Text(
+                                    const Text(
                                       "::Informasi::",
                                       style: TextStyle(fontSize: 17),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
-                                    Text("Error"),
+                                    const Text("Error"),
                                   ],
                                 )),
                 )));
     });
   }
 }
+
 
 class HomeContent extends StatelessWidget {
   final int? value;
@@ -315,7 +319,7 @@ class HomeContent extends StatelessWidget {
       activeColor: const Color(0xFF0a4f8f),
       title: Text(
         '$jawaban',
-        style: TextStyle(fontSize: 14),
+        style: const TextStyle(fontSize: 14),
       ),
     );
   }
