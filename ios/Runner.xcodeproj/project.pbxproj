@@ -222,7 +222,7 @@
 		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -232,7 +232,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 		98E777C010A9729E76382484 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -370,8 +370,8 @@
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = SM4UWYH39F;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.1.33;
-				FLUTTER_BUILD_NUMBER = 40;
+				FLUTTER_BUILD_NAME = 1.1.35;
+				FLUTTER_BUILD_NUMBER = 41;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "UMP Mobile Attendance";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -380,7 +380,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.33;
+				MARKETING_VERSION = 1.1.34;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.attedancekaryawanump.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -516,8 +516,8 @@
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = SM4UWYH39F;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.1.33;
-				FLUTTER_BUILD_NUMBER = 40;
+				FLUTTER_BUILD_NAME = 1.1.35;
+				FLUTTER_BUILD_NUMBER = 41;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "UMP Mobile Attendance";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -526,7 +526,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.33;
+				MARKETING_VERSION = 1.1.34;
 				PRODUCT_BUNDLE_IDENTIFIER = com.attedancekaryawanump.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -553,8 +553,8 @@
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = SM4UWYH39F;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.1.33;
-				FLUTTER_BUILD_NUMBER = 40;
+				FLUTTER_BUILD_NAME = 1.1.35;
+				FLUTTER_BUILD_NUMBER = 41;
 				INFOPLIST_FILE = Runner/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "UMP Mobile Attendance";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -563,7 +563,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.33;
+				MARKETING_VERSION = 1.1.34;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.attedancekaryawanump.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";

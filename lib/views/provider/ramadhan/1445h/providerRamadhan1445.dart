@@ -13,10 +13,13 @@ import 'package:attedancekaryawanump/views/model/modelsoalerror.dart';
 import 'package:attedancekaryawanump/views/model/modelsurah.dart';
 import 'package:attedancekaryawanump/views/model/modelsurahakhir.dart';
 import 'package:attedancekaryawanump/views/model/modelsurahawal.dart';
+import 'package:attedancekaryawanump/views/provider/ramadhan/1445h/model/logbookModel1445.dart';
 import 'package:attedancekaryawanump/views/utils/version.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'model/kegiatanModel1445.dart';
 
 class ProviderRamadhan1445 with ChangeNotifier {
   ModelSurahAwal? dataAwal;
@@ -33,6 +36,7 @@ class ProviderRamadhan1445 with ChangeNotifier {
   ModelEvaluasiQuisioner? dataquisioner;
   ModelSoalError? dataErrorPretest;
   ModelRekapPresensiRamdhan? rekappresensiramadhan;
+  ModelLogbook1445? dataLogbook;
   SharedPreferences? sharedPreferences;
   String? statusgel;
   String? statuspretest;
@@ -56,6 +60,7 @@ class ProviderRamadhan1445 with ChangeNotifier {
   bool? loadingdoa;
   bool? rekaploadingramadhan;
   bool? loadingsertifikat;
+  bool? loadingLogbookRamadhan;
   String? gelombang;
   String? statuPresensiDibuka;
   String? statuPresensiKet;
@@ -999,4 +1004,112 @@ class ProviderRamadhan1445 with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  // Logbook Untuk MANDIRI dan EKSTERNAL
+  Future<void> getDataLogbook() async {
+    try {
+      sharedPreferences = await SharedPreferences.getInstance();
+      String? gelombang = sharedPreferences?.getString('gelombang');
+      String? username = sharedPreferences?.getString('usernameLogin');
+
+      if (gelombang == null || username == null) {
+        // Handle case when gelombang or username is null
+        return;
+      }
+
+      String xtoken = await _getToken();
+
+      Map<String, String> headersxtoken = {"x-token": xtoken};
+
+      var url =
+          Uri.parse('https://developer.ump.ac.id/PD/ramadhan1445/logbook.php');
+      var body = {
+        "USERNAME": username,
+        "gelombang_id": gelombang,
+        "perintah_id": "1",
+      };
+
+      var bodyencode = jsonEncode(body);
+
+      var bodyResult =
+          await http.post(url, headers: headersxtoken, body: bodyencode);
+
+      loadingLogbookRamadhan = true;
+      notifyListeners();
+      var dataDecode = jsonDecode(bodyResult.body);
+      print(dataDecode);
+
+      if (dataDecode['metaData']['code'] == "200") {
+        List<Map<String, dynamic>> logbookList =
+            List<Map<String, dynamic>>.from(dataDecode['response']);
+        dataLogbook = ModelLogbook1445.fromJson(dataDecode);
+        dataLogbook?.sortByDateDesc();
+      } else {
+        // Handle non-OK response (code other than 200)
+        print('Error: ${dataDecode['metaData']['message']}');
+        loadingLogbookRamadhan = false;
+      }
+    } catch (error) {
+      // Handle any unexpected errors
+      print("Error in getDataLogbook: $error");
+    }
+  }
+
+  Future<String> _getToken() async {
+    var urltoken = Uri.parse('https://developer.ump.ac.id/token/index.php');
+    Map<String, String> getToken = {
+      "username": "pangkalandata",
+      "password": "ump",
+    };
+
+    var tokenencode = json.encode(getToken);
+    notifyListeners();
+
+    var responseToken = await http.post(urltoken, body: tokenencode);
+    var xtokenDecode = json.decode(responseToken.body);
+    print(responseToken.body);
+
+    var xtoken = xtokenDecode['response']['token'];
+    print("gelombang id $gelombang");
+
+    return xtoken;
+  }
+
+
+  // Get Data Kegiatan
+  List<Kegiatan> listKegiatan = [];
+  Future<void> getKegiatan() async {
+  try {
+    sharedPreferences = await SharedPreferences.getInstance();
+    String? gelombang = sharedPreferences?.getString('gelombang');
+    String? username = sharedPreferences?.getString('usernameLogin');
+
+    var url = Uri.parse(
+        'https://developer.ump.ac.id/PD/ramadhan1445/jenis_kegiatan.php');
+    var body = {
+      "USERNAME": username,
+      "gelombang_id": gelombang,
+      "perintah_id": "1",
+    };
+    var bodyencode = jsonEncode(body);
+    var bodyResult = await http.post(url, body: bodyencode);
+    
+    notifyListeners();
+    var dataDecode = jsonDecode(bodyResult.body);
+    var modelKegiatan = ModelKegiatan1445.fromJson(dataDecode);
+
+    // Setelah mendapatkan data, kita ingin mengisi daftar kegiatan untuk dropdown
+    listKegiatan.clear();
+    if (modelKegiatan.response != null) {
+      for (var kegiatan in modelKegiatan.response!) {
+        listKegiatan.add(Kegiatan(kegiatan.jenisKegiatanId!, kegiatan.jenisKegiatan!));
+      }
+    }
+
+    print("Data Kegiatan : $dataDecode");
+  } catch (e) {
+    loading = false;
+  }
+}
+
 }

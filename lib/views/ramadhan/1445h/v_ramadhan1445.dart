@@ -9,7 +9,10 @@ import 'package:attedancekaryawanump/views/ramadhan/1445h/quisioner/v_evaluasi_q
 import 'package:attedancekaryawanump/views/ramadhan/1445h/sertifikat/v_sertifikat_ramadhan1445.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_islamic_icons/flutter_islamic_icons.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+
+import 'logbook/v_logbook1445.dart';
 
 class Ramadhan1455 extends StatefulWidget {
   const Ramadhan1455({Key? key}) : super(key: key);
@@ -55,9 +58,13 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                     ? const Text('Ramadhan 1445')
                     : status == "BAIK"
                         ? const Text('Ramadhan 1445')
-                        : status == null
-                            ? const Text('Ramadhan')
-                            : const Text(""),
+                        : status == "MANDIRI"
+                            ? const Text('Ramadhan 1445')
+                            : status == "EKSTERNAL"
+                                ? const Text('Ramadhan 1445')
+                                : status == null
+                                    ? const Text('Ramadhan')
+                                    : const Text(""),
           ),
           body: status == "normal"
               ? SizedBox(
@@ -263,6 +270,35 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                                 child: Column(
                                   children: [
                                     CardRamadhan(
+                                      nama: "Imsakiyah",
+                                      deskripsi: "Jadwal Imsakiyah",
+                                      warna: Colors.white,
+                                      icon: FlutterIslamicIcons.sajadah,
+                                      ontap: () {
+                                        setState(() {
+                                          Fluttertoast.showToast(
+                                              msg: "Sentuh Untuk Keluar",
+                                              gravity: ToastGravity.CENTER,
+                                              toastLength: Toast.LENGTH_LONG,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.red,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0);
+                                        });
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            // ignore: prefer_const_constructors
+                                            builder: (context) =>
+                                                const FullScreenImage(
+                                              assetPath:
+                                                  "assets/images/imsak1445.jpg",
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    CardRamadhan(
                                       nama: "Presensi BAIK",
                                       deskripsi:
                                           "Kegiatan acara pelaksanaan BAIK",
@@ -367,20 +403,6 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                                                 builder:
                                                     (BuildContext context) =>
                                                         DoaHarian()));
-                                      },
-                                    ),
-                                    CardRamadhan(
-                                      nama: "Imsyakiyah",
-                                      deskripsi: "Jadwal Imsyakiyah",
-                                      // warna: Color(0xFF0a4f8f),
-                                      warna: Colors.white,
-                                      icon: FlutterIslamicIcons.sajadah,
-                                      ontap: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        Imsyakiyah()));
                                       },
                                     ),
                                     const SizedBox(
@@ -494,6 +516,36 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                                     child: Column(
                                       children: [
                                         CardRamadhan(
+                                          nama: "Imsakiyah",
+                                          deskripsi: "Jadwal Imsakiyah",
+                                          warna: Colors.white,
+                                          icon: FlutterIslamicIcons.sajadah,
+                                          ontap: () {
+                                            setState(() {
+                                              Fluttertoast.showToast(
+                                                  msg: "Sentuh Untuk Keluar",
+                                                  gravity: ToastGravity.CENTER,
+                                                  toastLength:
+                                                      Toast.LENGTH_LONG,
+                                                  timeInSecForIosWeb: 1,
+                                                  backgroundColor: Colors.red,
+                                                  textColor: Colors.white,
+                                                  fontSize: 16.0);
+                                            });
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                // ignore: prefer_const_constructors
+                                                builder: (context) =>
+                                                    const FullScreenImage(
+                                                  assetPath:
+                                                      "assets/images/imsak1445.jpg",
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        CardRamadhan(
                                           nama: "Presensi Itikaf",
                                           deskripsi:
                                               "Kegiatan acara pelaksanaan BAIK",
@@ -568,20 +620,6 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                                                         DoaHarian()));
                                           },
                                         ),
-                                        CardRamadhan(
-                                          nama: "Imsyakiyah",
-                                          deskripsi: "Jadwal Imsyakiyah",
-                                          // warna: Color(0xFF0a4f8f),
-                                          warna: Colors.white,
-                                          icon: FlutterIslamicIcons.sajadah,
-                                          ontap: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        Imsyakiyah()));
-                                          },
-                                        ),
                                         const SizedBox(
                                           height: 150,
                                         ),
@@ -598,7 +636,219 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                               height: MediaQuery.of(context).size.height,
                               width: MediaQuery.of(context).size.width,
                               child: SingleChildScrollView(
-                                child: Column(),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.08,
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 5),
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 5),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          border: Border.all(
+                                            color: const Color(0xFF1d8b61),
+                                          )),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 2,
+                                              child: Container(
+                                                height: double.infinity,
+                                                width: double.infinity,
+                                                decoration: const BoxDecoration(
+                                                    color: Color(0xFF1d8b61),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            bottomLeft: Radius
+                                                                .circular(5),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    5))),
+                                                child: const Icon(
+                                                  FlutterIslamicIcons.drum2,
+                                                  color: Colors.white,
+                                                  size: 35,
+                                                ),
+                                              )),
+                                          Expanded(
+                                            flex: 8,
+                                            child: Container(
+                                              height: double.infinity,
+                                              width: double.infinity,
+                                              padding: const EdgeInsets.only(
+                                                  left: 5, right: 5),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  const Text(
+                                                    'Anda Terdaftar pada',
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 15,
+                                                      color: Color(0xFF1d8b61),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 1,
+                                                  ),
+                                                  Text(
+                                                    "${v.datagelombang?.response?[0].keterangan} Gelombang ${v.datagelombang?.response?[0].gelombang}",
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12,
+                                                        color: Colors
+                                                            .red.shade800),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.90,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: SingleChildScrollView(
+                                          child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Column(
+                                          children: [
+                                            CardRamadhan(
+                                              nama: "Imsakiyah",
+                                              deskripsi: "Jadwal Imsakiyah",
+                                              warna: Colors.white,
+                                              icon: FlutterIslamicIcons.sajadah,
+                                              ontap: () {
+                                                setState(() {
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Sentuh Untuk Keluar",
+                                                      gravity:
+                                                          ToastGravity.CENTER,
+                                                      toastLength:
+                                                          Toast.LENGTH_LONG,
+                                                      timeInSecForIosWeb: 1,
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                      textColor: Colors.white,
+                                                      fontSize: 16.0);
+                                                });
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    // ignore: prefer_const_constructors
+                                                    builder: (context) =>
+                                                        const FullScreenImage(
+                                                      assetPath:
+                                                          "assets/images/imsak1445.jpg",
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                            CardRamadhan(
+                                              nama: "Evaluasi Mandiri",
+                                              deskripsi:
+                                                  "Kegiatan Evaluasi acara pelaksanaan Itikaf",
+                                              // warna: Color(0xFF0a4f8f),
+                                              warna: Colors.white,
+                                              icon:
+                                                  FlutterIslamicIcons.community,
+                                              ontap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            const EvaluasiQuisoner1445()));
+                                              },
+                                            ),
+                                            CardRamadhan(
+                                              nama: "Log Book",
+                                              deskripsi: "Buku Harian",
+                                              warna: Colors.white,
+                                              icon: FlutterIslamicIcons
+                                                  .tasbihHand,
+                                              ontap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            const LogBookRamadhan1445()));
+                                              },
+                                            ),
+                                            CardRamadhan(
+                                              nama: "Sertifikat Itikaf",
+                                              deskripsi:
+                                                  "Download Sertifikat Pelaksanaan Itikaf",
+                                              // warna: Color(0xFF0a4f8f),
+                                              warna: Colors.white,
+                                              icon: FlutterIslamicIcons
+                                                  .crescentMoon,
+                                              ontap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            const SetifikatRamadhan1445()));
+                                              },
+                                            ),
+                                            CardRamadhan(
+                                              nama: "Al Quran",
+                                              deskripsi: "Kitab Suci",
+                                              // warna: Color(0xFF0a4f8f),
+                                              warna: Colors.white,
+                                              icon: FlutterIslamicIcons.quran2,
+                                              ontap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            const MenuAlQuran()));
+                                              },
+                                            ),
+                                            CardRamadhan(
+                                              nama: "Doa Harian",
+                                              deskripsi: "Kumpulan Doa Harian",
+                                              // warna: Color(0xFF0a4f8f),
+                                              warna: Colors.white,
+                                              icon: FlutterIslamicIcons.prayer,
+                                              ontap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            DoaHarian()));
+                                              },
+                                            ),
+                                            
+                                          ],
+                                        ),
+                                      )),
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           : status == "EKSTERNAL"
@@ -606,7 +856,235 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                                   height: MediaQuery.of(context).size.height,
                                   width: MediaQuery.of(context).size.width,
                                   child: SingleChildScrollView(
-                                    child: Column(),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.08,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 5),
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 5),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border.all(
+                                                color: const Color(0xFF1d8b61),
+                                              )),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                  flex: 2,
+                                                  child: Container(
+                                                    height: double.infinity,
+                                                    width: double.infinity,
+                                                    decoration: const BoxDecoration(
+                                                        color:
+                                                            Color(0xFF1d8b61),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        5),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        5))),
+                                                    child: const Icon(
+                                                      FlutterIslamicIcons.drum2,
+                                                      color: Colors.white,
+                                                      size: 35,
+                                                    ),
+                                                  )),
+                                              Expanded(
+                                                flex: 8,
+                                                child: Container(
+                                                  height: double.infinity,
+                                                  width: double.infinity,
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5, right: 5),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      const Text(
+                                                        'Anda Terdaftar pada',
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Color(0xFF1d8b61),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 1,
+                                                      ),
+                                                      Text(
+                                                        "${v.datagelombang?.response?[0].keterangan} Gelombang ${v.datagelombang?.response?[0].gelombang}",
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 12,
+                                                            color: Colors
+                                                                .red.shade800),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.90,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: SingleChildScrollView(
+                                              child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: Column(
+                                              children: [
+                                                CardRamadhan(
+                                                  nama: "Imsakiyah",
+                                                  deskripsi: "Jadwal Imsakiyah",
+                                                  warna: Colors.white,
+                                                  icon: FlutterIslamicIcons
+                                                      .sajadah,
+                                                  ontap: () {
+                                                    setState(() {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "Sentuh Untuk Keluar",
+                                                          gravity: ToastGravity
+                                                              .CENTER,
+                                                          toastLength:
+                                                              Toast.LENGTH_LONG,
+                                                          timeInSecForIosWeb: 1,
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          textColor:
+                                                              Colors.white,
+                                                          fontSize: 16.0);
+                                                    });
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        // ignore: prefer_const_constructors
+                                                        builder: (context) =>
+                                                            const FullScreenImage(
+                                                          assetPath:
+                                                              "assets/images/imsak1445.jpg",
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                                CardRamadhan(
+                                                  nama: "Evaluasi Eksternal",
+                                                  deskripsi:
+                                                      "Kegiatan Evaluasi acara pelaksanaan Itikaf",
+                                                  // warna: Color(0xFF0a4f8f),
+                                                  warna: Colors.white,
+                                                  icon: FlutterIslamicIcons
+                                                      .community,
+                                                  ontap: () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                const EvaluasiQuisoner1445()));
+                                                  },
+                                                ),
+                                                CardRamadhan(
+                                                  nama: "Log Book",
+                                                  deskripsi: "Buku Harian",
+                                                  warna: Colors.white,
+                                                  icon: FlutterIslamicIcons
+                                                      .tasbihHand,
+                                                  ontap: () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                const LogBookRamadhan1445()));
+                                                  },
+                                                ),
+                                                CardRamadhan(
+                                                  nama: "Sertifikat Itikaf",
+                                                  deskripsi:
+                                                      "Download Sertifikat Pelaksanaan Itikaf",
+                                                  // warna: Color(0xFF0a4f8f),
+                                                  warna: Colors.white,
+                                                  icon: FlutterIslamicIcons
+                                                      .crescentMoon,
+                                                  ontap: () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                const SetifikatRamadhan1445()));
+                                                  },
+                                                ),
+                                                CardRamadhan(
+                                                  nama: "Al Quran",
+                                                  deskripsi: "Kitab Suci",
+                                                  // warna: Color(0xFF0a4f8f),
+                                                  warna: Colors.white,
+                                                  icon: FlutterIslamicIcons
+                                                      .quran2,
+                                                  ontap: () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                const MenuAlQuran()));
+                                                  },
+                                                ),
+                                                CardRamadhan(
+                                                  nama: "Doa Harian",
+                                                  deskripsi:
+                                                      "Kumpulan Doa Harian",
+                                                  // warna: Color(0xFF0a4f8f),
+                                                  warna: Colors.white,
+                                                  icon: FlutterIslamicIcons
+                                                      .prayer,
+                                                  ontap: () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                DoaHarian()));
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 )
                               : status == null
@@ -685,7 +1163,7 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: const [
-                                                             Text(
+                                                            Text(
                                                               "Menu Al Qur'an",
                                                               maxLines: 2,
                                                               overflow:
@@ -703,10 +1181,10 @@ class _Ramadhan1455State extends State<Ramadhan1455> {
                                                                     0xFF1d8b61),
                                                               ),
                                                             ),
-                                                             SizedBox(
+                                                            SizedBox(
                                                               height: 1,
                                                             ),
-                                                             Text(
+                                                            Text(
                                                               "",
                                                               maxLines: 2,
                                                               overflow:
@@ -878,7 +1356,7 @@ class _CardRamadhanState extends State<CardRamadhan> {
                                   height: 7,
                                 ),
                                 const Text(
-                                  'Ramadhan 1444',
+                                  'Ramadhan 1445',
                                   maxLines: 2,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -930,6 +1408,43 @@ class _CardRamadhanState extends State<CardRamadhan> {
                   ),
                 )
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FullScreenImage extends StatelessWidget {
+  final String assetPath;
+
+  const FullScreenImage({Key? key, required this.assetPath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Container(
+          color: Colors.black,
+          child: Center(
+            child: FutureBuilder(
+              future: precacheImage(AssetImage(assetPath), context),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  return Image.asset(
+                    assetPath,
+                    fit: BoxFit.contain,
+                  );
+                } else {
+                  return const Text('Error loading image');
+                }
+              },
             ),
           ),
         ),

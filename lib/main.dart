@@ -26,8 +26,8 @@ import 'views/services/firebase_notification.dart';
 void main() async {
   //Firbase Notification
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await FirebaseApi().initNotification();
+  // await Firebase.initializeApp();
+  // await FirebaseApi().initNotification();
   initializeDateFormatting('id', null);
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();

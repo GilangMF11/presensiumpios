@@ -37,9 +37,9 @@ class ProviderRekap with ChangeNotifier {
       bulan = "09";
     }
     notifyListeners();
-    //var url = Uri.parse('https://attendance.ump.ac.id/api/v1/attendance/history?month=${tahun}-${bulan}');
-    var url = Uri.parse(
-        'http://192.168.14.213:8001/api/v1/attendance/history?month=${tahun}-${bulan}');
+    var url = Uri.parse('https://attendance.ump.ac.id/api/v1/attendance/history?month=${tahun}-${bulan}');
+    // var url = Uri.parse(
+    //     'http://192.168.14.213:8001/api/v1/attendance/history?month=${tahun}-${bulan}');
     var bodyResult = await http.get(
       url,
       headers: <String, String>{
